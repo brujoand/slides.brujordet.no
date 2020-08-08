@@ -7,11 +7,15 @@ digraph development {
   graph [overlap=false splines=curved penwidth=2.5]
   edge [color="#F5F5DC" penwidth=2.5 overlap=false]
 
-  "Code change"[penwidth=5]
+  "development"[label="Development\nloop" penwidth=5]
+  "test"[label="Test"]
+  "deploy-dev"[label="Deploy\nDev"]
+  "deploy-prod"[label="Deploy\nProd"]
+  "verify"[label="Verify"]
 
-  "Code change" -> "Build"
-  "Build" -> "Test"
-  "Test" -> "Validate"
-  "Validate" -> "Code change"
-  "Validate" -> "Upload" [splines=straight]
+  "development" -> "deploy-dev"
+  "deploy-dev" -> "test"
+  "test" -> "verify"
+  "verify" -> "development"
+  "verify" -> "deploy-prod"
 }

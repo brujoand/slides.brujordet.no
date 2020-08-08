@@ -278,83 +278,70 @@
 <section class="slide level1">
 
 <h2 id="development-loop">Development loop</h2>
-<p><img data-src="static/development_loop.png" /></p>
-</section>
-<section class="slide level1">
-
-<ul>
-<li>Push code changes</li>
-<li>CI should:
-<ul>
-<li>Run tests</li>
-<li>Run code analysis</li>
-<li>Run security analysis</li>
-<li>If everything passes, upload the artifact</li>
-</ul></li>
-<li>If any of the above fail, we fix and repeat</li>
-</ul>
-</section>
-<section class="slide level1">
-
-<h2 id="deployment-loop">Deployment loop</h2>
-<ul>
-<li>CD deploys to test</li>
-<li>CI runs integration tests</li>
-<li>User/Customer verifies</li>
-<li>CD deploys to production</li>
-</ul>
-</section>
-<section class="slide level1">
-
-<h2 id="monitoring-loop">Monitoring loop</h2>
-<ul>
-<li>A problem is reported by monitor (examples)</li>
-<li>Development loop</li>
-<li>Deployment loop</li>
-</ul>
-</section>
-<section class="slide level1">
-
-<h2 id="visualize-the-delivery-automation-system">Visualize the delivery automation system</h2>
-<p>graph</p>
-</section>
-<section class="slide level1">
-
-<h2 id="this-is-a-delivery-automation-system">This is a Delivery Automation System</h2>
-<ul>
-<li>The source code is:
-<ul>
-<li>Tested</li>
-<li>Deployed</li>
-<li>Verified</li>
-<li>Monitored</li>
-</ul></li>
-<li>It requires initial setup and configuration</li>
-<li>The pieces are hard coded, and can’t be swapped</li>
-</ul>
+<img data-src="static/development_loop.png" class="stretch" />
 <aside class="notes">
 <ul>
-<li>This is what Knowit and Finn had</li>
-<li>A hard coded, automated pipelines</li>
-<li>It requires on boarding and initial configuration</li>
+<li>Request for code change</li>
+<li>Change code, build, test</li>
+<li>Validate, static code analysis, security audit</li>
+<li>If all good, upload, else change again</li>
 </ul>
 </aside>
 </section>
 <section class="slide level1">
 
-<h2 id="the-delivery-platform">The Delivery Platform</h2>
+<h2 id="deployment-loop">Deployment loop</h2>
+<img data-src="static/deployment_loop.png" class="stretch" />
+<aside class="notes">
 <ul>
-<li>Task = job, with input and output</li>
-<li>Pipeline = a DAG of tasks</li>
+<li>Trigger could also be dependency changes</li>
+<li>Integration tests or manual tests</li>
+<li>Verify based on data or manual</li>
+</ul>
+</aside>
+</section>
+<section class="slide level1">
+
+<h2 id="monitoring-loop">Monitoring loop</h2>
+<img data-src="static/monitoring_loop.png" class="stretch" />
+<aside class="notes">
+<ul>
+<li>A problem is reported by monitor: errors, vulnerabilities</li>
+<li>Reported by metrics, logging, users or other tools</li>
+<li>Alert and fix</li>
+</ul>
+</aside>
+</section>
+<section class="slide level1">
+
+<h2 id="the-delivery-automation-system">The Delivery Automation System</h2>
+<img data-src="static/delivery_loop.png" class="stretch" />
+<aside class="notes">
+<ul>
+<li>So this is actually the DAS</li>
+<li>Everything is chained together</li>
+<li>All the steps are automated from src to prod</li>
+<li>Basically what Knowit &amp; Finn had</li>
+<li>But what if you have other needs?</li>
+</ul>
+</aside>
+</section>
+<section class="slide level1">
+
+<h2 id="the-hidden-building-blocks">The hidden building blocks</h2>
+<ul>
+<li>Step: a command</li>
+<li>Task: input &gt; [step1, step2, step3] &gt; output</li>
+<li>Pipeline: A Graph of tasks</li>
 <li>Default pipeline = Delivery Automation System</li>
 </ul>
 <aside class="notes">
 <ul>
-<li>Task is unit tests, or deploy to dev</li>
-<li>One pipeline for test and deploy to Artifact storage</li>
-<li>One pipeline for deploy to x and integration test</li>
-<li>Another for deploy to production</li>
-<li>One Meta pipeline that shows the overall progress</li>
+<li>Step: command to compile or test</li>
+<li>Task: input: git_url, steps[compile, test, upload], output: artifact_url</li>
+<li>Pipeline: Tasks; deploy and run integration tests.</li>
+<li>Pipeline: Build, Deploy+test, Manual approval, Deploy+prod</li>
+<li>This would be hidden in a Delivery Automation System</li>
 </ul>
 </aside>
 </section>
@@ -369,204 +356,190 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td>Automatic enrollment</td>
-<td>Manual setup*</td>
+<td>Opt-in</td>
+<td>Opt-out</td>
 </tr>
 <tr class="even">
 <td>Easy to add features</td>
 <td>Hard to add features</td>
 </tr>
 <tr class="odd">
+<td>Compliance is extra work</td>
+<td>Compliance is built in</td>
+</tr>
+<tr class="even">
 <td>Individual pipelines</td>
 <td>Shared pipelines</td>
 </tr>
-<tr class="even">
-<td>Customizable monitoring</td>
-<td>Shared monitoring setup</td>
-</tr>
 <tr class="odd">
-<td>Customizable tasks</td>
-<td>Shared tasks</td>
-</tr>
-<tr class="even">
-<td>Collaboration</td>
+<td>Developers own the Pipeline</td>
 <td>Traditional SaaS</td>
-</tr>
-<tr class="odd">
-<td>DevOps</td>
-<td>Automated Ops</td>
 </tr>
 </tbody>
 </table>
 <aside class="notes">
 <ul>
-<li><ul>
-<li>Usually requires use of a company tool during build</li>
-</ul></li>
 <li>Features could be support for new languages or tools</li>
 <li>Customizing requires knowledge of underlying tool</li>
+<li>The platform could be used as a Delivery Automation System by relying only on the Default Pipeline</li>
 </ul>
 </aside>
 </section>
 <section class="slide level1">
 
 <h2 id="a-delivery-platform-is..">A Delivery Platform is..</h2>
-<p>.. a set of <strong>services</strong> that can be <strong>composed</strong> as <strong>tasks</strong> into a <strong>pipeline</strong> that brings source code into production in a <strong>safe</strong>, <strong>predictable</strong> and <strong>repeatable</strong> manner with <strong>sane defaults</strong>.</p>
+<p>.. a <strong>customizable</strong> set of <strong>services</strong> that can be <strong>composed</strong> through <strong>tasks</strong> into a <strong>pipeline</strong> that builds, verifies and deploys source code in a <strong>safe</strong>, <strong>predictable</strong> and <strong>repeatable</strong> manner with <strong>sane defaults</strong>.</p>
 <aside class="notes">
 <ul>
 <li>That’s probably the longest introduction I’ve had to any presentation</li>
+<li>But this talk doesn’t make sense if we don’t have the same definition</li>
 </ul>
 </aside>
 </section>
 <section class="slide level1">
 
-<h2 id="main-building-a-delivery-platform">Main: Building a Delivery Platform</h2>
+<h2 id="building-a-delivery-platform-1">Building a Delivery Platform</h2>
 <h3 id="the-profit-and-pain">The profit and pain</h3>
 </section>
-<section id="know-where-you-are" class="slide level1" data-background-image="static/you_are_here.png">
-<h1 data-background-image="static/you_are_here.png">Know where you are</h1>
+<section id="where-are-you" class="slide level1" data-background-image="static/map_help.jpg" style="color:black">
+<h1 data-background-image="static/map_help.jpg" style="color:black">Where are you?</h1>
 <aside class="notes">
 <ul>
-<li>What is the current situation in the company</li>
-<li>What works, what doesn’t</li>
-<li>What is currently causing the most pain</li>
+<li>What is the current situation in the company?</li>
+<li>What works, what doesn’t?</li>
+<li>What is currently causing the most pain?</li>
 <li>Where can we add the most value first?</li>
-<li>Who can help with this</li>
+<li>Who can help with this?</li>
 <li>Do you have backing to do this?</li>
 </ul>
 </aside>
 </section>
-<section class="slide level1">
-
-<h2 id="interview-people">Interview people</h2>
-<ul>
-<li>What are their concerns</li>
-<li>What are their pain points?</li>
-<li>Where do they feel that we are?</li>
-<li>Do they all agree?</li>
-</ul>
+<section id="section-3" class="slide level1" data-background-image="static/map_help_faded.jpg">
+<h1 data-background-image="static/map_help_faded.jpg"></h1>
+<h2 id="if-lost-ask-for-help">If lost, ask for help</h2>
 <aside class="notes">
 <ul>
 <li>Talk to a few people from everywhere</li>
-<li>Developers</li>
-<li>Operations</li>
-<li>Managers</li>
-<li>Maybe even customers?</li>
+<li>Developers, Operations, Managers, Maybe even customers?</li>
+<li>What are their concerns, pain points?</li>
+<li>Where do they feel that we are?</li>
+<li>Do they all agree?</li>
 </ul>
 </aside>
 </section>
-<section class="slide level1">
-
-<h2 id="interview-people-1">Interview people</h2>
-<p>This information is extremely useful for:</p>
+<section id="section-4" class="slide level1" data-background-image="static/map_help_faded.jpg">
+<h1 data-background-image="static/map_help_faded.jpg"></h1>
+<h2 id="interviews-will-give-you-vital-information">Interviews will give you vital information</h2>
+<aside class="notes">
 <ul>
 <li>Designing the platform components</li>
 <li>Understanding what makes the platform useful for them</li>
 <li>Visualize areas where they could collaborate with other teams</li>
 <li>Identify and help mitigate team2team issues</li>
 </ul>
+</aside>
 </section>
-<section class="slide level1">
-
+<section id="section-5" class="slide level1" data-background-image="static/map_help_faded.jpg">
+<h1 data-background-image="static/map_help_faded.jpg"></h1>
 <h2 id="so-am-i-a-team-coach-now">So am I a team coach now?</h2>
-<p>In short; yes.</p>
+<p>Yes, kind of..</p>
+<aside class="notes">
 <ul>
 <li>If the teams are not cooperating you will be blocked by discussions and support.</li>
 <li>If teams are collaborating, they will support each other.</li>
-</ul>
-<aside class="notes">
-<ul>
 <li>Support and on boarding is by far the most expensive work</li>
 <li>The problems are usually very similar, and simple to fix</li>
 <li>The overhead of constantly context switching is huge</li>
 </ul>
 </aside>
 </section>
-<section class="slide level1">
-
-<h2 id="metrics">Metrics</h2>
+<section id="section-6" class="slide level1" data-background-image="static/map_help_faded.jpg">
+<h1 data-background-image="static/map_help_faded.jpg"></h1>
+<h2 id="use-metrics-to-verify-what-youve-learned">Use metrics to verify what you’ve learned</h2>
+<aside class="notes">
 <ul>
 <li>Start gathering metrics to visualize what you’ve learned from the interviews</li>
-<li>Did the metrics confirm or deny ?</li>
+<li>Did the metrics confirm or deny?</li>
+<li>In some cases a problem can be solved with training</li>
+<li>In other cases you’ll find bombs that are about to go off</li>
+<li>Sometimes just getting simple metrics is really hard, can we solve that?</li>
 </ul>
+</aside>
 </section>
-<section class="slide level1">
-
-<h2 id="dasboards-for-fun-and-profit">Dasboards for fun and profit</h2>
+<section id="section-7" class="slide level1" data-background-image="static/map_help_faded.jpg">
+<h1 data-background-image="static/map_help_faded.jpg"></h1>
+<h2 id="dashboards-make-it-official">Dashboards make it official</h2>
+<p>But be careful</p>
+<aside class="notes">
 <ul>
-<li>mention smashing</li>
-<li>show how it looks</li>
-<li>How does this help us win the platform battel?</li>
-<li>etc.. ::: notes</li>
-<li>Metrics and management is a dangerous subject</li>
-<li>It warrants it’s own presentation</li>
-<li>Suffice to say; What they see, they will measure you on. :::</li>
+<li>I tend to use the Smashing framework early on, as it’s easy to hack</li>
+<li>Show things that give value, but focus on what can be improved</li>
+<li>This can help us argue the case for spending resources on tech debt for instance.</li>
+<li>But if it is used to measure intangible things like people performance it is detrimental.</li>
+<li>This problem warrants it’s own presentation</li>
+<li>Suffice to say; What they see, they will measure you on.</li>
 </ul>
+</aside>
 </section>
 <section id="the-golden-path" class="slide level1" data-background-image="static/golden_path.jpg">
 <h1 data-background-image="static/golden_path.jpg">The Golden Path</h1>
 </section>
-<section class="slide level1">
-
-<h2 id="how-is-this-platform-used">How is this platform used?</h2>
-<ul>
-<li>Will everyone pick and choose tools and versions?</li>
-<li>Will you provide a set of default tools and versions?</li>
-</ul>
-</section>
-<section class="slide level1">
-
+<section id="section-8" class="slide level1" data-background-image="static/golden_path_faded.jpg">
+<h1 data-background-image="static/golden_path_faded.jpg"></h1>
 <h2 id="the-open-approach">The open approach</h2>
-<p>Pros: - Great for experienced DevOps teams - Teams are not very dependent on the Platform team</p>
-<p>Cons: - Huge cost in on-boarding for inexperienced teams - No centralized versioning or auditing - Much harder for teams to migrate to new tools</p>
+<p>Just provide the pieces and let everyone compose their own pipelines</p>
 <aside class="notes">
 <ul>
-<li><p>Freedom to choose all tools</p></li>
-<li><p>For small teams, with strong DevOps culture, this might work</p></li>
-<li><p>For larger teams, with less DevOps experience much more costly</p></li>
-<li><p>No centralized versioning or auditing. Who should be responsible?</p></li>
-<li><p>Who will help teams to migrate to new tools?</p></li>
+<li>Freedom to choose all tools</li>
+<li>Great for experienced DevOps teams</li>
+<li>Less dependent on the Platform team</li>
+<li>Huge cost in on-boarding for inexperienced teams</li>
+<li>No centralized versioning or auditing</li>
+<li>Most platform work is now shared, who will lead and negotiate?</li>
 </ul>
 </aside>
 </section>
-<section class="slide level1">
-
+<section id="section-9" class="slide level1" data-background-image="static/golden_path_faded.jpg">
+<h1 data-background-image="static/golden_path_faded.jpg"></h1>
 <h2 id="the-golden-path-1">The Golden Path</h2>
-<p>Pros: - Batteries included, no need to re-invent the wheel. - Teams are free to work on code, rather than config - Teams are still free to customize their tooling - But they must handle these integrations them selves</p>
-<p>Cons: - If something breaks they’ll be more dependent on the Platform team</p>
+<p>Provide a default path with batteries included</p>
 <aside class="notes">
 <ul>
-<li>Freedom to work on the interesting problems</li>
+<li>Teams are free to work on code, rather than config</li>
+<li>Teams are still free to customize their tooling</li>
+<li>If something breaks they’ll be more dependent on the Platform team</li>
 <li>Security of having support</li>
+<li>On-boarding new engineers is much easier</li>
 </ul>
 </aside>
 </section>
-<section class="slide level1">
-
-<h2 id="the-golden-path-a-shopping-list">The Golden Path, a shopping list</h2>
+<section id="section-10" class="slide level1" data-background-image="static/golden_path_faded.jpg">
+<h1 data-background-image="static/golden_path_faded.jpg"></h1>
+<h2 id="the-golden-path-a-shopping-list">The Golden Path; a shopping list</h2>
 <ul>
-<li>A default Pipeline; Build, Test, Audit, Deploy</li>
-<li>Default configuration of secrets, env variables etc.</li>
+<li>Pipeline</li>
+<li>Secrets &amp; environment variables</li>
+<li>Hardened base images</li>
+<li>Monitoring with metrics &amp; logging</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Pipeline; Build, Test, Audit, Deploy</li>
+<li>Injection of automatically rotated secrets and appropriate env variables</li>
 <li>Hardened, and up to date base images to build upon.</li>
-<li>Monitoring and logging included by convention.</li>
-</ul>
-<aside class="notes">
-<ul>
-<li>These are just building blocks that work</li>
-<li>They can be extended and built upon</li>
-<li>Security often comes last, why not get some for free?</li>
-<li>Monitoring by convention, how?</li>
+<li>Monitoring and logging included by convention</li>
+<li>Stray from the path at will, but you must get back on your own.</li>
 </ul>
 </aside>
 </section>
 <section class="slide level1">
 
-<h2 id="platform.yml">platform.yml</h2>
+<h2 id="example.yml">example.yml</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="at">  </span><span class="fu">application_name</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;dogfood-api&#39;</span></span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="at">  </span><span class="fu">application_name</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;dogfood-service&#39;</span></span></code></pre></div>
 <aside class="notes">
 <ul>
-<li>We require a PaaS version and a name for the app</li>
+<li>We require a tool version and a name for the app</li>
 <li>Everything else is set by default.</li>
 <li>But how can we extend this?</li>
 <li>Maybe I want to disable SonarQube?</li>
@@ -575,14 +548,14 @@
 </section>
 <section class="slide level1">
 
-<h2 id="platform.yml-1">platform.yml</h2>
+<h2 id="example.yml-1">example.yml</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="at">  …</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="at">  </span><span class="fu">healthchecks</span><span class="kw">:</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="at">    </span><span class="fu">liveness</span><span class="kw">:</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="at">      </span><span class="fu">http</span><span class="kw">:</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="at">        </span><span class="fu">path</span><span class="kw">:</span><span class="at"> /_/my_unconventional_health_check_path</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="at">        </span><span class="fu">path</span><span class="kw">:</span><span class="at"> /_/custom_health_path</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="at">  </span><span class="fu">ingress</span><span class="kw">:</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">host</span><span class="kw">:</span><span class="at"> dogfood-api.ingress.local</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">host</span><span class="kw">:</span><span class="at"> dogfood-service.ingress.local</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="at">  </span><span class="fu">ports</span><span class="kw">:</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">target_port</span><span class="kw">:</span><span class="at"> </span><span class="dv">5678</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="at">  </span><span class="fu">replicas</span><span class="kw">:</span></span>
@@ -630,7 +603,7 @@
 </ul>
 </aside>
 </section>
-<section id="section-3" class="slide level1" data-background-image="static/challenge_conventions.jpg">
+<section id="section-11" class="slide level1" data-background-image="static/challenge_conventions.jpg">
 <h1 data-background-image="static/challenge_conventions.jpg"></h1>
 <h2 id="never-be-afraid-to-challenge-the-conventions">Never be afraid to challenge the conventions</h2>
 <aside class="notes">
@@ -645,7 +618,7 @@
 <h2 id="defining-your-success-metrics">Defining your success metrics</h2>
 <p>After the interviews we gathered some metrics, which reflected our status quo. Now where do we want to go?</p>
 </section>
-<section id="section-4" class="slide level1" data-background-image="static/lowhanging_fruit.jpg">
+<section id="section-12" class="slide level1" data-background-image="static/lowhanging_fruit.jpg">
 <h1 data-background-image="static/lowhanging_fruit.jpg"></h1>
 <h2 id="low-hanging-fruits">Low hanging fruits</h2>
 <aside class="notes">
@@ -657,7 +630,7 @@
 </ul>
 </aside>
 </section>
-<section id="section-5" class="slide level1" data-background-image="static/lowhanging_fruit_faded.jpg">
+<section id="section-13" class="slide level1" data-background-image="static/lowhanging_fruit_faded.jpg">
 <h1 data-background-image="static/lowhanging_fruit_faded.jpg"></h1>
 <blockquote>
 <p>Here I am wearing myself out to get a bunch of sour grapes that are not worth gaping for.</p>
@@ -732,7 +705,7 @@
 </ul>
 </aside>
 </section>
-<section id="section-6" class="slide level1" data-background-image="static/dogfooding.jpg">
+<section id="section-14" class="slide level1" data-background-image="static/dogfooding.jpg">
 <h1 data-background-image="static/dogfooding.jpg"></h1>
 <h2 id="dogfooding">Dogfooding</h2>
 <aside class="notes">
@@ -745,7 +718,7 @@
 </ul>
 </aside>
 </section>
-<section id="section-7" class="slide level1" data-background-image="static/dogfooding_faded.jpg">
+<section id="section-15" class="slide level1" data-background-image="static/dogfooding_faded.jpg">
 <h1 data-background-image="static/dogfooding_faded.jpg"></h1>
 <h2 id="be-aware-though">Be aware though</h2>
 <p>You have insight into the tools in a way a user never will.</p>
@@ -825,7 +798,7 @@
 </ul>
 </aside>
 </section>
-<section id="section-8" class="slide level1" data-background-image="static/full_speed.jpg">
+<section id="section-16" class="slide level1" data-background-image="static/full_speed.jpg">
 <h1 data-background-image="static/full_speed.jpg"></h1>
 <h2 id="full-speed-ahead">Full speed ahead</h2>
 <aside class="notes">
@@ -838,7 +811,7 @@
 </ul>
 </aside>
 </section>
-<section id="section-9" class="slide level1" data-background-image="static/full_speed_faded.jpg">
+<section id="section-17" class="slide level1" data-background-image="static/full_speed_faded.jpg">
 <h1 data-background-image="static/full_speed_faded.jpg"></h1>
 <h2 id="questions">Questions?</h2>
 <p>Feel free to share your experiences, ask questions or disagree with me on Twitter: <span class="citation" data-cites="brujoand">@brujoand</span></p>

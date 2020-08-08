@@ -174,160 +174,156 @@ seminar
 ---
 
 ## Development loop
-![](static/development_loop.png)
 
+![](static/development_loop.png){.stretch}
 
----
-
-- Push code changes
-- CI should:
-  - Run tests
-  - Run code analysis
-  - Run security analysis
-  - If everything passes, upload the artifact
-- If any of the above fail, we fix and repeat
+::: notes
+- Request for code change
+- Change code, build, test
+- Validate, static code analysis, security audit
+- If all good, upload, else change again
+:::
 
 ---
 
 ## Deployment loop
 
-- CD deploys to test
-- CI runs integration tests
-- User/Customer verifies
-- CD deploys to production
-
----
-
-## Monitoring loop
-- A problem is reported by monitor (examples)
-- Development loop
-- Deployment loop
-
----
-
-## Visualize the delivery automation system
-graph
-
----
-
-## This is a Delivery Automation System
-- The source code is:
-  - Tested
-  - Deployed
-  - Verified
-  - Monitored
-- It requires initial setup and configuration
-- The pieces are hard coded, and can't be swapped
+![](static/deployment_loop.png){.stretch}
 
 ::: notes
-- This is what Knowit and Finn had
-- A hard coded, automated pipelines
-- It requires on boarding and initial configuration
+- Trigger could also be dependency changes
+- Integration tests or manual tests
+- Verify based on data or manual
 :::
 
 ---
 
-## The Delivery Platform
+## Monitoring loop
 
-- Task = job, with input and output
-- Pipeline = a DAG of tasks
+![](static/monitoring_loop.png){.stretch}
+
+::: notes
+- A problem is reported by monitor: errors, vulnerabilities
+- Reported by metrics, logging, users or other tools
+- Alert and fix
+:::
+
+---
+
+## The Delivery Automation System
+
+![](static/delivery_loop.png){.stretch}
+
+::: notes
+- So this is actually the DAS
+- Everything is chained together
+- All the steps are automated from src to prod
+- Basically what Knowit & Finn had
+- But what if you have other needs?
+:::
+
+---
+
+## The hidden building blocks
+
+- Step: a command
+- Task: input > [step1, step2, step3] > output
+- Pipeline: A Graph of tasks
 - Default pipeline = Delivery Automation System
 
 ::: notes
-- Task is unit tests, or deploy to dev
-- One pipeline for test and deploy to Artifact storage
-- One pipeline for deploy to x and integration test
-- Another for deploy to production
-- One Meta pipeline that shows the overall progress
+- Step: command to compile or test
+- Task: input: git_url, steps[compile, test, upload], output: artifact_url
+- Pipeline: Tasks; deploy and run integration tests.
+- Pipeline: Build, Deploy+test, Manual approval, Deploy+prod
+- This would be hidden in a Delivery Automation System
 :::
 
 ---
 
 | Platform | Automation System |
 |-|-|
-| Automatic enrollment | Manual setup* |
+| Opt-in | Opt-out |
 | Easy to add features | Hard to add features |
+| Compliance is extra work | Compliance is built in |
 | Individual pipelines | Shared pipelines |
-| Customizable monitoring | Shared monitoring setup |
-| Customizable tasks | Shared tasks|
-| Collaboration | Traditional SaaS |
-| DevOps | Automated Ops |
+| Developers own the Pipeline | Traditional SaaS |
 
 ::: notes
-- * Usually requires use of a company tool during build
 - Features could be support for new languages or tools
 - Customizing requires knowledge of underlying tool
+- The platform could be used as a Delivery Automation System by relying only on
+the Default Pipeline
 :::
 
 ---
 
 ## A Delivery Platform is..
 
-.. a set of __services__ that can be __composed__ as __tasks__ into a __pipeline__ that brings
-source code into production in a __safe__, __predictable__ and __repeatable__ manner with
-__sane defaults__.
+.. a __customizable__ set of __services__ that can be __composed__ through __tasks__ into a
+__pipeline__ that builds, verifies and deploys source code in a __safe__,
+__predictable__ and __repeatable__ manner with __sane defaults__.
 
 ::: notes
 - That's probably the longest introduction I've had to any presentation
+- But this talk doesn't make sense if we don't have the same definition
 :::
 
 ---
 
 
-## Main: Building a Delivery Platform
+## Building a Delivery Platform
 ### The profit and pain
 
 
-# Know where you are {data-background-image="static/you_are_here.png"}
+# Where are you? {data-background-image="static/map_help.jpg" style="color:black"}
 
 ::: notes
-- What is the current situation in the company
-- What works, what doesn't
-- What is currently causing the most pain
+- What is the current situation in the company?
+- What works, what doesn't?
+- What is currently causing the most pain?
 - Where can we add the most value first?
-- Who can help with this
+- Who can help with this?
 - Do you have backing to do this?
 :::
 
 ---
 
-## Interview people
-- What are their concerns
-- What are their pain points?
-- Where do they feel that we are?
-- Do they all agree?
+# {data-background-image="static/map_help_faded.jpg"}
+## If lost, ask for help
 
 ::: notes
 - Talk to a few people from everywhere
-- Developers
-- Operations
-- Managers
-- Maybe even customers?
+- Developers, Operations, Managers, Maybe even customers?
+- What are their concerns, pain points?
+- Where do they feel that we are?
+- Do they all agree?
 :::
 
 ---
 
-## Interview people
+# {data-background-image="static/map_help_faded.jpg"}
+## Interviews will give you vital information
 
-This information is extremely useful for:
-
+::: notes
 - Designing the platform components
 - Understanding what makes the platform useful for them
 - Visualize areas where they could collaborate with other teams
 - Identify and help mitigate team2team issues
+:::
 
 ---
 
 
+# {data-background-image="static/map_help_faded.jpg"}
 ## So am I a team coach now?
 
-In short; yes.
+Yes, kind of..
 
+::: notes
 - If the teams are not cooperating you will be blocked by discussions and
 support.
 - If teams are collaborating, they will support each other.
-
-::: notes
 - Support and on boarding is by far the most expensive work
 - The problems are usually very similar, and simple to fix
 - The overhead of constantly context switching is huge
@@ -335,20 +331,31 @@ support.
 
 ---
 
-## Metrics
+# {data-background-image="static/map_help_faded.jpg"}
+## Use metrics to verify what you've learned
+
+::: notes
 - Start gathering metrics to visualize what you've learned from the interviews
-- Did the metrics confirm or deny ?
+- Did the metrics confirm or deny?
+- In some cases a problem can be solved with training
+- In other cases you'll find bombs that are about to go off
+- Sometimes just getting simple metrics is really hard, can we solve that?
+:::
 
 ---
 
-## Dasboards for fun and profit
-- mention smashing
-- show how it looks
-- How does this help us win the platform battel?
-- etc..
+# {data-background-image="static/map_help_faded.jpg"}
+## Dashboards make it official
+
+But be careful
+
 ::: notes
-- Metrics and management is a dangerous subject
-- It warrants it's own presentation
+- I tend to use the Smashing framework early on, as it's easy to hack
+- Show things that give value, but focus on what can be improved
+- This can help us argue the case for spending resources on tech debt for instance.
+- But if it is used to measure intangible things like people performance it is
+detrimental.
+- This problem warrants it's own presentation
 - Suffice to say; What they see, they will measure you on.
 :::
 
@@ -359,79 +366,65 @@ support.
 
 ---
 
-## How is this platform used?
-  - Will everyone pick and choose tools and versions?
-  - Will you provide a set of default tools and versions?
-
----
-
+# {data-background-image="static/golden_path_faded.jpg"}
 ## The open approach
 
-Pros:
-- Great for experienced DevOps teams
-- Teams are not very dependent on the Platform team
-
-Cons:
-- Huge cost in on-boarding for inexperienced teams
-- No centralized versioning or auditing
-- Much harder for teams to migrate to new tools
-
+Just provide the pieces and let everyone compose their own pipelines
 
 ::: notes
 - Freedom to choose all tools
-- For small teams, with strong DevOps culture, this might work
-
-- For larger teams, with less DevOps experience much more costly
-- No centralized versioning or auditing. Who should be responsible?
-- Who will help teams to migrate to new tools?
+- Great for experienced DevOps teams
+- Less dependent on the Platform team
+- Huge cost in on-boarding for inexperienced teams
+- No centralized versioning or auditing
+- Most platform work is now shared, who will lead and negotiate?
 :::
 
 ---
 
+# {data-background-image="static/golden_path_faded.jpg"}
 ## The Golden Path
 
-Pros:
-- Batteries included, no need to re-invent the wheel.
+Provide a default path with batteries included
+
+::: notes
 - Teams are free to work on code, rather than config
 - Teams are still free to customize their tooling
-  - But they must handle these integrations them selves
-
-Cons:
 - If something breaks they'll be more dependent on the Platform team
-
-
-::: notes
-- Freedom to work on the interesting problems
 - Security of having support
+- On-boarding new engineers is much easier
 :::
 
 ---
 
-## The Golden Path, a shopping list
+# {data-background-image="static/golden_path_faded.jpg"}
+## The Golden Path; a shopping list
 
-- A default Pipeline; Build, Test, Audit, Deploy
-- Default configuration of secrets, env variables etc.
-- Hardened, and up to date base images to build upon.
-- Monitoring and logging included by convention.
+- Pipeline
+- Secrets & environment variables
+- Hardened base images
+- Monitoring with metrics & logging
 
 ::: notes
-- These are just building blocks that work
-- They can be extended and built upon
-- Security often comes last, why not get some for free?
-- Monitoring by convention, how?
+- Pipeline; Build, Test, Audit, Deploy
+- Injection of automatically rotated secrets and appropriate env variables
+- Hardened, and up to date base images to build upon.
+- Monitoring and logging included by convention
+- Stray from the path at will, but you must get back on your own.
 :::
 
 ---
 
-## platform.yml
+## example.yml
 
 ```yaml
   version: 2
-  application_name: 'dogfood-api'
+  application_name: 'dogfood-service'
 ```
 
+
 ::: notes
-  - We require a PaaS version and a name for the app
+  - We require a tool version and a name for the app
   - Everything else is set by default.
   - But how can we extend this?
   - Maybe I want to disable SonarQube?
@@ -439,16 +432,16 @@ Cons:
 
 ---
 
-## platform.yml
+## example.yml
 
 ```yaml
   …
   healthchecks:
     liveness:
       http:
-        path: /_/my_unconventional_health_check_path
+        path: /_/custom_health_path
   ingress:
-    - host: dogfood-api.ingress.local
+    - host: dogfood-service.ingress.local
   ports:
     - target_port: 5678
   replicas:

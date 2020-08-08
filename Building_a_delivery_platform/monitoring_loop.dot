@@ -1,17 +1,17 @@
 digraph development {
-  rankdir=LR;
-  rank="same"
+  rankdir="RL"
   bgcolor="transparent"
   layout=circo
   node [color="#F5F5DC" fontcolor="#F5F5DC" fontname="Arial" shape=circle fontsize=16 fixedsize=true width=1.5 penwidth=2.5]
   graph [overlap=false splines=curved penwidth=2.5]
   edge [color="#F5F5DC" penwidth=2.5 overlap=false]
 
-  "Code change"[penwidth=5]
+  "development"[label="Development\nLoop", penwidth=5]
+  "deployment"[label="Deployment\nLoop"]
 
-  "Code change" -> "Build"
-  "Build" -> "Test"
-  "Test" -> "Validate"
-  "Validate" -> "Code change"
-  "Validate" -> "Upload" [splines=straight]
+  "Monitor" -> "Alert"
+  "Alert" -> "development"
+  "Alert" -> "Rollback"
+  "development" -> "deployment"
+  "deployment" -> "Monitor"
 }
