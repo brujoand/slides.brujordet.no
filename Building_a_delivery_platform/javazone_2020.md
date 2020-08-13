@@ -15,18 +15,13 @@ Anders Brujordet
 
 ---
 
-## Assumptions
-- You know that delivering small changes often is a good approach
-
----
-
 # {data-background-image="static/containers_faded.jpg"}
 ## What is a Delivery Platform?
 
 
 ::: notes
-Story time
-Let's start by looking at how I stumbled into building one
+- This is a bit complicated
+- Let's start by looking at how I stumbled into building one
 
 :::
 
@@ -36,7 +31,6 @@ Let's start by looking at how I stumbled into building one
 
 - Company: Knowit Objectnet
 - Developers: 50+
-- Title: Java Consultant
 - Project: Public Sector Integration Bus
 
 ::: notes
@@ -69,7 +63,6 @@ seminar
 
 - Company: Finn.no
 - Developers: 150+
-- Title: Scala developer
 - Project: Public and Private REST APIs
 
 ::: notes
@@ -83,8 +76,8 @@ seminar
 ---
 
 ## What enabled this?
-- Strong Product organization that pushed for innovation
-- Efforts driven by infra and some eager Developers
+- Product pushed for innovation
+- Strong infra team and some eager Developers
 - __They had support from management and product__
 
 ::: notes
@@ -99,13 +92,12 @@ seminar
 
 - Company: Schibsted
 - Developers: 1500+
-- Title: Infrastructure Engineer
 - Project: Schibsteds Global CI/CD platform
 
 ::: notes
 - We created a global platform for CI/CD
 - CI: Travis, CD: Spinnaker, Monitoring: DataDog + Sumologic
-- Many other teams were creating so many useful tools
+- Many other teams were creating many useful tools
 - Managed k8s clusters, custom secret management etc
 - Inspired by Netflix, Google, Twitter etc.
 - Huge collaborative effort
@@ -114,7 +106,7 @@ seminar
 ---
 
 ## Why were they doing this?
-- Driven by infra organization, and eager teams
+- Strong infra organization, and eager teams
 - Companies could save money by sharing the cost
 - __They had support from top level leadership__
 
@@ -128,7 +120,9 @@ seminar
 
 ## The common culture
 
-- Eager to learn and share, focus on best practices
+- Solid technical skill
+- Eager to learn and share
+- focus on best practices
 - Responsibility is shared, but driven by a few
 - Support from management and the organization
 
@@ -219,12 +213,24 @@ seminar
 - Everything is chained together
 - All the steps are automated from src to prod
 - Basically what Knowit & Finn had
-- But what if you have other needs?
+- But what if you have other needs, different needs?
 :::
 
 ---
 
-## The hidden building blocks
+## When Delivery Automation isn't enough
+
+::: notes
+- For KnowIt and Finn this worked well
+- They had a pretty homogeneous tech stack
+- But what if you have teams doing completely different things?
+- You need to be able to customize this process
+- So let's look at how it's built
+:::
+
+---
+
+## Building a loop
 
 - Step: a command
 - Task: input > [step1, step2, step3] > output
@@ -271,14 +277,24 @@ __predictable__ and __repeatable__ manner with __sane defaults__.
 
 ---
 
+# A nice graph
+showing two teams deploying completely different tech stacks with completely
+different tools using the same platform
+stash -> team city -> helm -> k8s
+
+github -> travis -> spinnaker -> aws
+
+---
+
 
 ## Building a Delivery Platform
 ### The profit and pain
 
 
-# Where are you? {data-background-image="static/map_help.jpg" style="color:black"}
+# {data-background-image="static/map_help.jpg" style="color:black"}
 
 ::: notes
+- Where are you?
 - What is the current situation in the company?
 - What works, what doesn't?
 - What is currently causing the most pain?
@@ -422,7 +438,6 @@ Provide a default path with batteries included
   application_name: 'dogfood-service'
 ```
 
-
 ::: notes
   - We require a tool version and a name for the app
   - Everything else is set by default.
@@ -463,12 +478,12 @@ Provide a default path with batteries included
 
 ## Convention over configuration
 
-- What if you had to check a manual before:
   - Driving on an new road?
   - Eating in a new restaurant?
   - Talking to a new person?
 
 ::: notes
+  - What if you had to check a manual before:
   - Instead we rely on conventions
   - We know that driving on a road A is similar to road B.
 :::
@@ -477,13 +492,13 @@ Provide a default path with batteries included
 
 ## Convention over configuration
 
-It makes a world of difference when:
 - Integrating tools
 - Figuring out what belongs where
 - Configuring custom pipelines
-
+- Setting up dashboards
 
 :::notes
+- It makes a world of difference when:
 - Naming conventions, between Github and NexusIQ
 - You can just follow the name
 - You know how we name things, so you have guidance
@@ -492,26 +507,63 @@ It makes a world of difference when:
 ---
 
 # {data-background-image="static/challenge_conventions.jpg"}
-## Never be afraid to challenge the conventions
+
 
 ::: notes
+- But don't just blindly follow
+- Challenge the conventions, that's how they evolve
 - They are a tool, to guide and help
 - Not limit or restrict
 :::
 
 ---
 
-## Defining your success metrics
+# {data-background-image="static/winner.jpg"}
 
-After the interviews we gathered some metrics, which reflected
-our status quo. Now where do we want to go?
+::: notes
+- We have to define our success metrics
+- interviews gave us status quo
+- now where do we want to go?
+:::
+
+---
+
+# {data-background-image="static/winner_faded.jpg"}
+## Defining success (and failure)
+
+- Desired state
+- Incremental small goals
+- Monitor red flags
+
+::: notes
+- A Delivery Platform is a constant work in progress
+- No end goal, but define a moving 'desired state'
+- If it stops changing it's not done, it's dying
+- Small incremental goals, gives motivation and progress
+- Look at adoption, teams metrics, comparison to 'desired state'
+- And watch for red flags
+:::
+
+---
+
+# {data-background-image="static/winner_faded.jpg"}
+## Monitor red flags
+
+- Teams disabling features
+- Lack of team metrics improvement
+
+::: notes
+- many teams start disabling a certain feature, why? Is it not working/helping?
+- teams have no improvement on metrics, are they not using the tooling?
+- These are signs that you are not helping them
+:::
 
 ---
 
 # {data-background-image="static/lowhanging_fruit.jpg"}
-## Low hanging fruits
 
 ::: notes
+- So, we have defined our success, how do we start getting forward?
 - Start with the low hanging fruits
 - Usually this means smaller teams, with less legacy
 - Usually they have less automation, maybe never even deployed
@@ -519,7 +571,6 @@ our status quo. Now where do we want to go?
 :::
 
 ---
-
 
 # {data-background-image="static/lowhanging_fruit_faded.jpg"}
 
@@ -531,20 +582,23 @@ our status quo. Now where do we want to go?
 - The story goes, that the fox eyed the biggest grapes hanging the highest vine.
 - When he could not reach them he belittled the grapes, as sour / not worth his time
 - This is a classic mistake of over reaching, and it's easy to do.
-- As on-boarding high profile teams gives the platform publicity.
+- As on-boarding high profile teams gives the platform publicity and validation
 - But the stakes are high, and they don't have time to spend on buggy platforms
 :::
 
 ---
 
+# {data-background-image="static/lowhanging_fruit_faded.jpg"}
 ## Ask for volunteers
 
-Or prepare for resistance!
+Or prepare for a challenge!
 
 ::: notes
 - In the early phases of creating the first proper platform
 - We were instructed to on-board certain teams
 - This sometimes worked, but also failed _hard_ at times
+- They didn't really need our tooling.
+- We got stressed as we saw this would fail
 - Gave the impression that we could give them orders.
 - This also exacerbates cognitive biases
 :::
@@ -558,7 +612,8 @@ Or prepare for resistance!
 
 ::: notes
 - And in our case that often made sense
-- If our offering was not much better than what they already had
+- If our offering was not much better than what they already had, this was a
+loss.
 - Especially considering the work needed to migrate
 - Big reason for low hanging fruit
 :::
@@ -597,11 +652,10 @@ did not want to loose their useful features.
 ---
 
 # {data-background-image="static/dogfooding.jpg"}
-## Dogfooding
 
 ::: notes
 - Sales people use this argument all the time
-- I drive this car my self. Suddenly we trust their review more
+- 'I drive this car my self.' Suddenly we trust their review more
 - But there is some truth to this
 - Using the tools we make, is a great way to test, and improve them.
 - Early warning system
@@ -614,6 +668,10 @@ did not want to loose their useful features.
 
 You have insight into the tools in a way a user never will.
 
+::: notes
+- You know the code, the integrations
+- You know where to report bugs, how to fix configuration
+:::
 
 ---
 
@@ -635,12 +693,12 @@ You have insight into the tools in a way a user never will.
 ---
 
 ## First iteration at Schibsted
-- One delivery team of 4 people
+- One Delivery team of 4 people
 - Artifactory, Travis, Spinnaker
-- All users were participating in discussions on Slack
-- We were very available
+- We helped people on Slack
 
 ::: notes
+- We were extremely available
 - This worked great, we got lots of valuable feedback
 - Fast iterations, detailed bug reports, quick fixes
 - The user felt safe, because we were right there with them
@@ -650,20 +708,18 @@ You have insight into the tools in a way a user never will.
 
 ## But it doesn't scale
 
-A few months later, we all had a slack notification bar that looked like we just
-posted about free ice cream in the 'Everyone' channel.
+A few months later, we were completely exhausted by constant interruptions
 
 ::: notes
-- Constant interruptions
 - Repeated questions
 - Features and support both suffered a lot
 - Some users were getting really frustrated, as their tickets weren't handled
-- We, were getting frustrated
+- We, were getting frustrated as we were getting nowhere
 :::
 
 ---
 
-## So what had changed?
+## So what changed?
 - 50 users increased to 500
 - General population instead of just the most interested
 - We were no longer picking only low hanging fruits
@@ -671,18 +727,28 @@ posted about free ice cream in the 'Everyone' channel.
 
 ---
 
-## The Unified Support
-- _One_ entrypoint for all platform support in Jira
-- Changing product support channels to community channels
-- _One_ slack channel for urgent bug reports, and status updates
-- The one call team member handled support routing
+# {data-background-image="static/white_knight.jpg"}
 
 ::: notes
-- Our manager restructured our entire support setup
-- Letting users have one place to report bugs
-- Regardless of where the ticket should be routed
-- The community channels became a great place for teams, and users started
-  taking responsibility helping others
+- To our rescue, comes a white knight
+- We had recently gotten a dedicated manager
+- He helped us re-think our support setup
+:::
+
+---
+
+# {data-background-image="static/white_knight_faded.jpg"}
+## The Unified Support
+- _One_ entrypoint
+- Slack only for dedicated support, and incidents
+- One call handles support routing
+
+::: notes
+- Letting users have one place to report bugs, for all services
+- At this time there were other teams handling some services. But users only see
+the front end.
+- Slack support channels became community channels
+- In these channels user started taking on support
 :::
 
 ---
@@ -705,7 +771,3 @@ posted about free ice cream in the 'Everyone' channel.
 
 Feel free to share your experiences, ask questions or disagree with me on
 Twitter: @brujoand
-
-</br>
-
-Images in this presentation were sourced from pxfuel.com and pexels.com

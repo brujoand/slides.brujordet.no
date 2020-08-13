@@ -11,7 +11,8 @@ for md_folder in *; do
     html_file=${md_file/.md/.html}
     echo "Generating ${html_file}"
     pandoc -s -t revealjs \
-      -V hlss="zenburn" \
+      --metadata title="JavaZone 2020" \
+      --highlight-style=/Users/brujoand/src/slides.brujordet.no/zenburn.theme \
       -V transition=slide \
       -V backgroundTransition=fade \
       -V theme=brujoand \
@@ -26,3 +27,4 @@ for md_folder in *; do
 done
 
 echo 'Done'
+
