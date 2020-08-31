@@ -99,7 +99,7 @@
 <h2 id="topics">Topics</h2>
 <ol type="1">
 <li>What is a Delivery Platform?</li>
-<li>Building a Delivery Platform</li>
+<li>How do we build one?</li>
 </ol>
 </section>
 <section id="section-2" class="slide level1" data-background-image="static/containers_faded.jpg">
@@ -123,9 +123,10 @@
 <aside class="notes">
 <ul>
 <li>10 years ago I was a Java consultant at Knowit, one of my first jobs</li>
-<li>Surprisingly not slow with bureaucracy++, hand holding</li>
+<li>50 devs in company, 10 or so on my team.</li>
+<li>Working on integration bus for the municipality.</li>
 <li>CI: Hudson, Monitoring: Nagios, early adopters Github Enterprise</li>
-<li>CD: started slow, then Puppet + some ruby</li>
+<li>CD: started slow, handholding, but then Puppet + some ruby</li>
 <li>A great first experience as a developer</li>
 </ul>
 </aside>
@@ -133,16 +134,12 @@
 <section class="slide level1">
 
 <h2 id="what-enabled-this">What enabled this?</h2>
-<ul>
-<li>Mostly nerds who loved their job</li>
-<li>A few key people drove this specific process</li>
-<li><strong>They had support from management</strong></li>
-</ul>
 <aside class="notes">
 <ul>
 <li>First off; I had no idea that this was weird in 2011, public sector</li>
-<li>I assumed that periodic deployments was a thing of the past</li>
-<li>They wanted to: learn, try new things, use best practices.</li>
+<li>Mostly nerds who loved their job</li>
+<li>A few key people drove this specific process</li>
+<li><strong>They had support from management</strong></li>
 <li>Strong tech culture, lot’s of knowledge sharing</li>
 <li>Even the financial chief implemented a coding challenge in excel during seminar</li>
 </ul>
@@ -150,7 +147,7 @@
 </section>
 <section class="slide level1">
 
-<h2 id="scaling-up">Scaling up</h2>
+<h2 id="scalaing-up">Scal(a)ing up</h2>
 <ul>
 <li>Company: Finn.no</li>
 <li>Developers: 150+</li>
@@ -159,7 +156,7 @@
 <aside class="notes">
 <ul>
 <li>After working 3 years on Java, I wanted to learn more Scala</li>
-<li>Finn had a really solid Scala team, where I learned so much</li>
+<li>Finn had a really solid Scala team</li>
 <li>CI: Bamboo, CD: Puppet, Monitoring: Grafana + ELK</li>
 <li>Lot’s of tools, and homemade deployment web UI. Nice</li>
 <li>I got to create CI for Varnish</li>
@@ -169,15 +166,13 @@
 <section class="slide level1">
 
 <h2 id="what-enabled-this-1">What enabled this?</h2>
-<ul>
-<li>Product pushed for innovation</li>
-<li>Strong infra team and some eager Developers</li>
-<li><strong>They had support from management and product</strong></li>
-</ul>
 <aside class="notes">
 <ul>
 <li>Lot of the same culture as Knowit</li>
 <li>Little fear of change</li>
+<li>Product pushed for innovation</li>
+<li>Strong infra team and some eager Developers</li>
+<li><strong>They had support from management and product</strong></li>
 <li>They wanted to: learn, try new things, use best practices.</li>
 </ul>
 </aside>
@@ -194,6 +189,8 @@
 <ul>
 <li>We created a global platform for CI/CD</li>
 <li>CI: Travis, CD: Spinnaker, Monitoring: DataDog + Sumologic</li>
+<li>More active approach to tooling.</li>
+<li>On prem Travis, active partners on Spinnaker</li>
 <li>Many other teams were creating many useful tools</li>
 <li>Managed k8s clusters, custom secret management etc</li>
 <li>Inspired by Netflix, Google, Twitter etc.</li>
@@ -204,13 +201,11 @@
 <section class="slide level1">
 
 <h2 id="why-were-they-doing-this">Why were they doing this?</h2>
+<aside class="notes">
 <ul>
 <li>Strong infra organization, and eager teams</li>
 <li>Companies could save money by sharing the cost</li>
 <li><strong>They had support from top level leadership</strong></li>
-</ul>
-<aside class="notes">
-<ul>
 <li>Schibsted = Many similar sites = similar needs</li>
 <li>Exceptionally hungry culture, very senior engineers</li>
 <li>They wanted to: learn, try new things, use best practices.</li>
@@ -221,17 +216,15 @@
 
 <h2 id="the-common-culture">The common culture</h2>
 <ul>
-<li>Solid technical skill</li>
-<li>Eager to learn and share</li>
-<li>focus on best practices</li>
-<li>Responsibility is shared, but driven by a few</li>
-<li>Support from management and the organization</li>
+<li>Strong engineers</li>
+<li>Focus on best practices and improvements</li>
+<li>Support from management</li>
 </ul>
 <aside class="notes">
 <ul>
-<li>Everyone takes responsibility for adopting and using</li>
-<li>A few eagerly improve the solution</li>
-<li>Management sees the benefits and supports usage of time</li>
+<li>Strong engineers</li>
+<li>Focus on best practices and continuous improvements</li>
+<li>Support from management</li>
 </ul>
 </aside>
 </section>
@@ -239,13 +232,13 @@
 
 <h2 id="the-common-benefits">The common benefits</h2>
 <ul>
-<li>Less distractions for developers</li>
+<li>CI/CD is fully automated</li>
 <li>Shorter feedback loops</li>
 <li>Easier to visualize current status</li>
 </ul>
 <aside class="notes">
 <ul>
-<li>less distractions, faster development, happy developers</li>
+<li>Fully automated -&gt; less distractions</li>
 <li>Short feedback loops -&gt; less bugs, faster fixes</li>
 <li>Insight -&gt; Easier to argue for fixing tech debt</li>
 </ul>
@@ -253,24 +246,29 @@
 </section>
 <section class="slide level1">
 
-<h2 id="lets-try-to-make-a-definition">Let’s try to make a definition</h2>
+<h2 id="so-is-this-a-delivery-platform">So is this a Delivery Platform?</h2>
 <img data-src="static/devops_cloud.png" title="fig:" class="stretch" alt="DevOps_cloud" />
 <aside class="notes">
 <ul>
+<li>Yes and no</li>
 <li>We have a bunch of tools</li>
-<li>But they are not a platform</li>
-<li>We need to chain them, into reusable loops</li>
+<li>The difference is is how these tools are connected</li>
 </ul>
 </aside>
 </section>
 <section class="slide level1">
 
-<h2 id="what-does-this-look-like">What does this look like?</h2>
+<h2 id="lets-break-it-down">Let’s break it down</h2>
 <ul>
 <li>Development loop</li>
 <li>Deployment loop</li>
 <li>Monitoring loop</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>We basically have three loops</li>
+</ul>
+</aside>
 </section>
 <section class="slide level1">
 
@@ -278,10 +276,12 @@
 <img data-src="static/development_loop.png" class="stretch" />
 <aside class="notes">
 <ul>
-<li>Request for code change</li>
-<li>Change code, build, test</li>
-<li>Validate, static code analysis, security audit</li>
-<li>If all good, upload, else change again</li>
+<li>We push some code change</li>
+<li>We build it</li>
+<li>We test it</li>
+<li>Validate it, static code analysis, security audit</li>
+<li>If all good, upload</li>
+<li>If not, repeat the loop</li>
 </ul>
 </aside>
 </section>
@@ -291,9 +291,11 @@
 <img data-src="static/deployment_loop.png" class="stretch" />
 <aside class="notes">
 <ul>
-<li>Trigger could also be dependency changes</li>
+<li>We start with the development loop</li>
+<li>We upload the built artifact</li>
 <li>Integration tests or manual tests</li>
-<li>Verify based on data or manual</li>
+<li>Verify based on data or manual action</li>
+<li>Deploy to production</li>
 </ul>
 </aside>
 </section>
@@ -303,9 +305,13 @@
 <img data-src="static/monitoring_loop.png" class="stretch" />
 <aside class="notes">
 <ul>
-<li>A problem is reported by monitor: errors, vulnerabilities</li>
+<li>We started with development loop</li>
+<li>Then the deployment loop</li>
+<li>Now we monitor and watch for problems</li>
+<li>This could be runtime errors, vulnerabilities etc..</li>
 <li>Reported by metrics, logging, users or other tools</li>
-<li>Alert and fix</li>
+<li>When a problem occurs, we alert, maybe we rollback</li>
+<li>And we go back to the development loop</li>
 </ul>
 </aside>
 </section>
@@ -315,45 +321,74 @@
 <img data-src="static/delivery_loop.png" class="stretch" />
 <aside class="notes">
 <ul>
-<li>So this is actually the DAS</li>
-<li>Everything is chained together</li>
+<li>This is what I call a Delivery Automation System</li>
+<li>Everything is chained together nicely</li>
 <li>All the steps are automated from src to prod</li>
 <li>Basically what Knowit &amp; Finn had</li>
-<li>But what if you have other needs, different needs?</li>
+<li>This can appear as a black box, that ‘fixes CI/CD’</li>
+<li>But what if you have other needs, different technology?</li>
 </ul>
 </aside>
 </section>
 <section class="slide level1">
 
-<h2 id="when-delivery-automation-isnt-enough">When Delivery Automation isn’t enough</h2>
+<h2 id="when-a-das-is-perfect">When a DAS is perfect</h2>
 <aside class="notes">
 <ul>
-<li>For KnowIt and Finn this worked well</li>
-<li>They had a pretty homogeneous tech stack</li>
-<li>But what if you have teams doing completely different things?</li>
-<li>You need to be able to customize this process</li>
-<li>So let’s look at how it’s built</li>
+<li>For Knowit a DAS was perfect</li>
+<li>Mostly Java, same needs, same deployment target</li>
+<li>Finn had a more diversity and their DAS was starting to get a lot of addons.</li>
+<li>They were in a process of creating a Delivery Platform</li>
+<li>For Schibsted, the DAS just doesn’t work. To much diversity.</li>
 </ul>
 </aside>
 </section>
 <section class="slide level1">
 
-<h2 id="building-a-loop">Building a loop</h2>
-<ul>
-<li>Step: a command</li>
-<li>Task: input &gt; [step1, step2, step3] &gt; output</li>
-<li>Pipeline: A Graph of tasks</li>
-<li>Default pipeline = Delivery Automation System</li>
-</ul>
+<h2 id="when-a-das-falls-short">When a DAS falls short</h2>
 <aside class="notes">
 <ul>
-<li>Step: command to compile or test</li>
-<li>Task: input: git_url, steps[compile, test, upload], output: artifact_url</li>
-<li>Pipeline: Tasks; deploy and run integration tests.</li>
-<li>Pipeline: Build, Deploy+test, Manual approval, Deploy+prod</li>
-<li>This would be hidden in a Delivery Automation System</li>
+<li>When teams are doing different things</li>
+<li>Backend, Machine Learning, search applications, frontend, mobile etc..</li>
+<li>Finn had started to feel some of this, and made additions to the DAS</li>
+<li>Schibsted had just too much diversity, and started building a platform</li>
+<li>So let’s look at how this is done</li>
 </ul>
 </aside>
+</section>
+<section class="slide level1">
+
+<h2 id="from-a-das-to-platform">From a DAS to Platform</h2>
+<img data-src="static/blackbox_1.png" class="stretch" />
+</section>
+<section class="slide level1">
+
+<h2 id="from-a-das-to-platform-1">From a DAS to Platform</h2>
+<img data-src="static/blackbox_2.png" class="stretch" />
+</section>
+<section class="slide level1">
+
+<h2 id="from-a-das-to-platform-2">From a DAS to Platform</h2>
+<img data-src="static/blackbox_3.png" class="stretch" />
+</section>
+<section class="slide level1">
+
+<h2 id="from-a-das-to-platform-3">From a DAS to Platform</h2>
+<img data-src="static/blackbox_4.png" class="stretch" />
+</section>
+<section class="slide level1">
+
+<h2 id="from-a-das-to-platform-4">From a DAS to Platform</h2>
+<img data-src="static/blackbox_5.png" class="stretch" />
+</section>
+<section class="slide level1">
+
+<h2 id="from-a-das-to-chaos">From a DAS to chaos?</h2>
+<img data-src="static/blackbox_6.png" class="stretch" />
+</section>
+<section class="slide level1">
+
+<h2 id="the-magic-is-in-the-glue-not-the-tools">The magic is in the glue, not the tools</h2>
 </section>
 <section class="slide level1">
 
@@ -370,8 +405,8 @@
 <td>Opt-out</td>
 </tr>
 <tr class="even">
-<td>Easy to add features</td>
-<td>Hard to add features</td>
+<td>Loose coupling</td>
+<td>Tight coupling</td>
 </tr>
 <tr class="odd">
 <td>Compliance is extra work</td>
@@ -398,7 +433,7 @@
 <section class="slide level1">
 
 <h2 id="a-delivery-platform-is..">A Delivery Platform is..</h2>
-<p>.. a <strong>customizable</strong> set of <strong>services</strong> that can be <strong>composed</strong> through <strong>tasks</strong> into a <strong>pipeline</strong> that builds, verifies and deploys source code in a <strong>safe</strong>, <strong>predictable</strong> and <strong>repeatable</strong> manner with <strong>sane defaults</strong>.</p>
+<p>.. a <strong>customizable</strong> set of <strong>services</strong> that can be <strong>composed</strong> through <strong>event integrations</strong> into a <strong>pipeline</strong> that builds, verifies and deploys source code in a <strong>safe</strong>, <strong>predictable</strong> and <strong>repeatable</strong> manner with <strong>sane defaults</strong>.</p>
 <aside class="notes">
 <ul>
 <li>That’s probably the longest introduction I’ve had to any presentation</li>
@@ -406,17 +441,12 @@
 </ul>
 </aside>
 </section>
-<section id="a-nice-graph" class="slide level1">
-<h1>A nice graph</h1>
-<p>showing two teams deploying completely different tech stacks with completely different tools using the same platform stash -&gt; team city -&gt; helm -&gt; k8s</p>
-<p>github -&gt; travis -&gt; spinnaker -&gt; aws</p>
-</section>
-<section class="slide level1">
-
+<section id="section-3" class="slide level1" data-background-image="static/soria_moria_faded.jpg">
+<h1 data-background-image="static/soria_moria_faded.jpg"></h1>
 <h2 id="building-a-delivery-platform-1">Building a Delivery Platform</h2>
 <h3 id="the-profit-and-pain">The profit and pain</h3>
 </section>
-<section id="section-3" class="slide level1" data-background-image="static/map_help.jpg" style="color:black">
+<section id="section-4" class="slide level1" data-background-image="static/map_help.jpg" style="color:black">
 <h1 data-background-image="static/map_help.jpg" style="color:black"></h1>
 <aside class="notes">
 <ul>
@@ -430,20 +460,20 @@
 </ul>
 </aside>
 </section>
-<section id="section-4" class="slide level1" data-background-image="static/map_help_faded.jpg">
+<section id="section-5" class="slide level1" data-background-image="static/map_help_faded.jpg">
 <h1 data-background-image="static/map_help_faded.jpg"></h1>
 <h2 id="if-lost-ask-for-help">If lost, ask for help</h2>
 <aside class="notes">
 <ul>
 <li>Talk to a few people from everywhere</li>
 <li>Developers, Operations, Managers, Maybe even customers?</li>
-<li>What are their concerns, pain points?</li>
+<li>What are their concerns, pain points WRT delivery?</li>
 <li>Where do they feel that we are?</li>
 <li>Do they all agree?</li>
 </ul>
 </aside>
 </section>
-<section id="section-5" class="slide level1" data-background-image="static/map_help_faded.jpg">
+<section id="section-6" class="slide level1" data-background-image="static/map_help_faded.jpg">
 <h1 data-background-image="static/map_help_faded.jpg"></h1>
 <h2 id="interviews-will-give-you-vital-information">Interviews will give you vital information</h2>
 <aside class="notes">
@@ -452,10 +482,11 @@
 <li>Understanding what makes the platform useful for them</li>
 <li>Visualize areas where they could collaborate with other teams</li>
 <li>Identify and help mitigate team2team issues</li>
+<li>Identify and mitigate biases</li>
 </ul>
 </aside>
 </section>
-<section id="section-6" class="slide level1" data-background-image="static/map_help_faded.jpg">
+<section id="section-7" class="slide level1" data-background-image="static/map_help_faded.jpg">
 <h1 data-background-image="static/map_help_faded.jpg"></h1>
 <h2 id="so-am-i-a-team-coach-now">So am I a team coach now?</h2>
 <p>Yes, kind of..</p>
@@ -466,62 +497,63 @@
 <li>Support and on boarding is by far the most expensive work</li>
 <li>The problems are usually very similar, and simple to fix</li>
 <li>The overhead of constantly context switching is huge</li>
-</ul>
-</aside>
-</section>
-<section id="section-7" class="slide level1" data-background-image="static/map_help_faded.jpg">
-<h1 data-background-image="static/map_help_faded.jpg"></h1>
-<h2 id="use-metrics-to-verify-what-youve-learned">Use metrics to verify what you’ve learned</h2>
-<aside class="notes">
-<ul>
-<li>Start gathering metrics to visualize what you’ve learned from the interviews</li>
-<li>Did the metrics confirm or deny?</li>
-<li>In some cases a problem can be solved with training</li>
-<li>In other cases you’ll find bombs that are about to go off</li>
-<li>Sometimes just getting simple metrics is really hard, can we solve that?</li>
+<li>Most people just glance at documentation, and ask for help.</li>
 </ul>
 </aside>
 </section>
 <section id="section-8" class="slide level1" data-background-image="static/map_help_faded.jpg">
 <h1 data-background-image="static/map_help_faded.jpg"></h1>
+<h2 id="use-metrics-to-verify-what-youve-learned">Use metrics to verify what you’ve learned</h2>
+<aside class="notes">
+<ul>
+<li>Start gathering metrics to visualize what you’ve learned from the interviews</li>
+<li>Did the metrics confirm or deny what you learned?</li>
+<li>You might find ticking bombs, that we have to fix ASAP.</li>
+<li>Or things that work really well. We need to keep those.</li>
+<li>Let’s put this data in a dashboard.</li>
+</ul>
+</aside>
+</section>
+<section id="section-9" class="slide level1" data-background-image="static/map_help_faded.jpg">
+<h1 data-background-image="static/map_help_faded.jpg"></h1>
 <h2 id="dashboards-make-it-official">Dashboards make it official</h2>
-<p>But be careful</p>
+<p>But be careful..</p>
 <aside class="notes">
 <ul>
 <li>I tend to use the Smashing framework early on, as it’s easy to hack</li>
 <li>Show things that give value, but focus on what can be improved</li>
-<li>This can help us argue the case for spending resources on tech debt for instance.</li>
+<li>One episode, where we added data from SonarQube. It showed a lot of tech debt. SonarQube had been running for over a year, but now that it was visualized an engineer took it upon himself to fix almost 200 hours of tech debt in a couple of days.</li>
+<li>Dashboards can help us argue the case for spending resources on tech debt like this.</li>
 <li>But if it is used to measure intangible things like people performance it is detrimental.</li>
 <li>This problem warrants it’s own presentation</li>
-<li>Suffice to say; What they see, they will measure you on.</li>
+<li>Suffice to say; What management sees, they will measure us on.</li>
 </ul>
 </aside>
 </section>
 <section id="the-golden-path" class="slide level1" data-background-image="static/golden_path.jpg">
 <h1 data-background-image="static/golden_path.jpg">The Golden Path</h1>
 </section>
-<section id="section-9" class="slide level1" data-background-image="static/golden_path_faded.jpg">
+<section id="section-10" class="slide level1" data-background-image="static/golden_path_faded.jpg">
 <h1 data-background-image="static/golden_path_faded.jpg"></h1>
-<h2 id="the-open-approach">The open approach</h2>
+<h2 id="the-open-platform">The open platform</h2>
 <p>Just provide the pieces and let everyone compose their own pipelines</p>
 <aside class="notes">
 <ul>
-<li>Freedom to choose all tools</li>
-<li>Great for experienced DevOps teams</li>
+<li>Freedom to choose from all the tools</li>
+<li>Could be nice for experienced DevOps teams</li>
 <li>Less dependent on the Platform team</li>
 <li>Huge cost in on-boarding for inexperienced teams</li>
 <li>No centralized versioning or auditing</li>
-<li>Most platform work is now shared, who will lead and negotiate?</li>
 </ul>
 </aside>
 </section>
-<section id="section-10" class="slide level1" data-background-image="static/golden_path_faded.jpg">
+<section id="section-11" class="slide level1" data-background-image="static/golden_path_faded.jpg">
 <h1 data-background-image="static/golden_path_faded.jpg"></h1>
 <h2 id="the-golden-path-1">The Golden Path</h2>
 <p>Provide a default path with batteries included</p>
 <aside class="notes">
 <ul>
-<li>Teams are free to work on code, rather than config</li>
+<li>Teams are free to work on code, rather than configuration</li>
 <li>Teams are still free to customize their tooling</li>
 <li>If something breaks they’ll be more dependent on the Platform team</li>
 <li>Security of having support</li>
@@ -529,21 +561,23 @@
 </ul>
 </aside>
 </section>
-<section id="section-11" class="slide level1" data-background-image="static/golden_path_faded.jpg">
+<section id="section-12" class="slide level1" data-background-image="static/golden_path_faded.jpg">
 <h1 data-background-image="static/golden_path_faded.jpg"></h1>
 <h2 id="the-golden-path-a-shopping-list">The Golden Path; a shopping list</h2>
 <ul>
-<li>Pipeline</li>
-<li>Secrets &amp; environment variables</li>
+<li>A visual Pipeline</li>
+<li>Managed secrets &amp; environment variables</li>
 <li>Hardened base images</li>
 <li>Monitoring with metrics &amp; logging</li>
+<li>Support</li>
 </ul>
 <aside class="notes">
 <ul>
-<li>Pipeline; Build, Test, Audit, Deploy</li>
-<li>Injection of automatically rotated secrets and appropriate env variables</li>
-<li>Hardened, and up to date base images to build upon.</li>
-<li>Monitoring and logging included by convention</li>
+<li>A visual Pipeline</li>
+<li>Managed secrets &amp; environment variables</li>
+<li>Hardened base images</li>
+<li>Monitoring with metrics &amp; logging</li>
+<li>Support</li>
 <li>Stray from the path at will, but you must get back on your own.</li>
 </ul>
 </aside>
@@ -552,13 +586,16 @@
 
 <h2 id="example.yml">example.yml</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="at">  </span><span class="fu">application_name</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;dogfood-service&#39;</span></span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;Java&#39;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="at">  </span><span class="fu">application_name</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;dogfood-service&#39;</span></span></code></pre></div>
 <aside class="notes">
 <ul>
-<li>We require a tool version and a name for the app</li>
-<li>Everything else is set by default.</li>
+<li>So let’s opt in, by adding this example.yml file</li>
+<li>We require a tool version and a name for the app, that’s it.</li>
+<li>When we commit this file, a simple jenkins build is configured, along with deployment of the artifact and a container to k8s.</li>
+<li>Everything we don’t see here is set by default.</li>
 <li>But how can we extend this?</li>
-<li>Maybe I want to disable SonarQube?</li>
+<li>Maybe I want to disable the SonarQube check?</li>
 </ul>
 </aside>
 </section>
@@ -582,10 +619,10 @@
 <aside class="notes">
 <ul>
 <li>This was actually a part of a k8s deloyment</li>
-<li>So we can drop into k8s. Full power.</li>
+<li>So we can drop into k8s. With full access to it’s powers.</li>
 <li>This is basically Fiaas, that we used at Finn.</li>
 <li>For a k8s shop, this makes sense.</li>
-<li>You might need a different way of doing this</li>
+<li>You might need a different way of doing this.</li>
 </ul>
 </aside>
 </section>
@@ -601,69 +638,72 @@
 <ul>
 <li>What if you had to check a manual before:</li>
 <li>Instead we rely on conventions</li>
-<li>We know that driving on a road A is similar to road B.</li>
+<li>We know that driving on a road A is similar to most roads.</li>
+<li>This saves time, and makes us feel safe.</li>
 </ul>
 </aside>
 </section>
 <section class="slide level1">
 
 <h2 id="convention-over-configuration-1">Convention over configuration</h2>
+<p>Is not only helping the consumer</p>
+<aside class="notes">
 <ul>
+<li>It makes a world of difference when:</li>
 <li>Integrating tools</li>
 <li>Figuring out what belongs where</li>
 <li>Configuring custom pipelines</li>
 <li>Setting up dashboards</li>
-</ul>
-<aside class="notes">
-<ul>
-<li>It makes a world of difference when:</li>
 <li>Naming conventions, between Github and NexusIQ</li>
 <li>You can just follow the name</li>
-<li>You know how we name things, so you have guidance</li>
+<li>You know how we name things, so you have guidance.</li>
 </ul>
 </aside>
 </section>
-<section id="section-12" class="slide level1" data-background-image="static/challenge_conventions.jpg">
+<section id="section-13" class="slide level1" data-background-image="static/challenge_conventions.jpg">
 <h1 data-background-image="static/challenge_conventions.jpg"></h1>
 <aside class="notes">
 <ul>
 <li>But don’t just blindly follow</li>
 <li>Challenge the conventions, that’s how they evolve</li>
-<li>They are a tool, to guide and help</li>
-<li>Not limit or restrict</li>
 </ul>
 </aside>
 </section>
-<section id="section-13" class="slide level1" data-background-image="static/winner.jpg">
+<section id="section-14" class="slide level1" data-background-image="static/challenge_conventions_faded.jpg">
+<h1 data-background-image="static/challenge_conventions_faded.jpg"></h1>
+<p>Conventions should guide not restrict us.</p>
+</section>
+<section id="section-15" class="slide level1" data-background-image="static/winner.jpg">
 <h1 data-background-image="static/winner.jpg"></h1>
 <aside class="notes">
 <ul>
+<li>How do we know that we are winning?</li>
 <li>We have to define our success metrics</li>
 <li>interviews gave us status quo</li>
 <li>now where do we want to go?</li>
 </ul>
 </aside>
 </section>
-<section id="section-14" class="slide level1" data-background-image="static/winner_faded.jpg">
+<section id="section-16" class="slide level1" data-background-image="static/winner_faded.jpg">
 <h1 data-background-image="static/winner_faded.jpg"></h1>
 <h2 id="defining-success-and-failure">Defining success (and failure)</h2>
 <ul>
 <li>Desired state</li>
 <li>Incremental small goals</li>
-<li>Monitor red flags</li>
+<li>Monitor for red flags</li>
 </ul>
 <aside class="notes">
 <ul>
+<li>We should define a desired state</li>
+<li>We reach this state by meeting small well defined goals, to keep us motivated</li>
+<li>While we watch for red flags</li>
 <li>A Delivery Platform is a constant work in progress</li>
-<li>No end goal, but define a moving ‘desired state’</li>
+<li>No real end goal, but define a moving target ‘desired state’</li>
 <li>If it stops changing it’s not done, it’s dying</li>
-<li>Small incremental goals, gives motivation and progress</li>
-<li>Look at adoption, teams metrics, comparison to ‘desired state’</li>
-<li>And watch for red flags</li>
 </ul>
 </aside>
 </section>
-<section id="section-15" class="slide level1" data-background-image="static/winner_faded.jpg">
+<section id="section-17" class="slide level1" data-background-image="static/winner_faded.jpg">
 <h1 data-background-image="static/winner_faded.jpg"></h1>
 <h2 id="monitor-red-flags">Monitor red flags</h2>
 <ul>
@@ -674,23 +714,41 @@
 <ul>
 <li>many teams start disabling a certain feature, why? Is it not working/helping?</li>
 <li>teams have no improvement on metrics, are they not using the tooling?</li>
-<li>These are signs that you are not helping them</li>
+<li>This is not an insult or rebellion</li>
+<li>These are signs that the platform isn’t helping them</li>
+<li>We need to understand and adapt</li>
 </ul>
 </aside>
 </section>
-<section id="section-16" class="slide level1" data-background-image="static/lowhanging_fruit.jpg">
+<section class="slide level1">
+
+<h2 id="success-isnt-just-about-what-developers-want">Success isn’t just about what developers want</h2>
+<aside class="notes">
+<ul>
+<li>The organization also needs us to focus on security</li>
+<li>because often, this is overlooked and not prioritized within the teams</li>
+<li>People tend to think they have okay security, without any actual data</li>
+<li>“Everybody has a plan until they get punched in the face”</li>
+<li>We can easily add security checks and alerts, and even automatic pull request for bumping dependencies.</li>
+<li>We can maintain hardened base images.</li>
+<li>We can monitor for services exposing data without authentication</li>
+</ul>
+</aside>
+</section>
+<section id="section-18" class="slide level1" data-background-image="static/lowhanging_fruit.jpg">
 <h1 data-background-image="static/lowhanging_fruit.jpg"></h1>
 <aside class="notes">
 <ul>
-<li>So, we have defined our success, how do we start getting forward?</li>
+<li>So, we have our status quo, we have defined our ‘desired state’</li>
+<li>How do we start actually doing this?</li>
 <li>Start with the low hanging fruits</li>
 <li>Usually this means smaller teams, with less legacy</li>
-<li>Usually they have less automation, maybe never even deployed</li>
-<li>Often happy to get help, stretched for resources</li>
+<li>Usually they have less automation, maybe never even deployed to production</li>
+<li>Often happy to get help, as they tend to be stretched for resources</li>
 </ul>
 </aside>
 </section>
-<section id="section-17" class="slide level1" data-background-image="static/lowhanging_fruit_faded.jpg">
+<section id="section-19" class="slide level1" data-background-image="static/lowhanging_fruit_faded.jpg">
 <h1 data-background-image="static/lowhanging_fruit_faded.jpg"></h1>
 <blockquote>
 <p>Here I am wearing myself out to get a bunch of sour grapes that are not worth gaping for.</p>
@@ -698,17 +756,18 @@
 <p>- Aesop’s Fables</p>
 <aside class="notes">
 <ul>
-<li>The story goes, that the fox eyed the biggest grapes hanging the highest vine.</li>
-<li>When he could not reach them he belittled the grapes, as sour / not worth his time</li>
-<li>This is a classic mistake of over reaching, and it’s easy to do.</li>
+<li>The story goes, that the fox eyed the biggest grapes hanging on the highest vine.</li>
+<li>When he couldn’t reach them he belittled the grapes, as sour and not worth his time</li>
+<li>This is a classic mistake of over-reaching, and it’s easy to do.</li>
 <li>As on-boarding high profile teams gives the platform publicity and validation</li>
-<li>But the stakes are high, and they don’t have time to spend on buggy platforms</li>
+<li>But the stakes are high, and these teams don’t have time to spend on buggy platforms</li>
+<li>We need to be ready for these teams</li>
 </ul>
 </aside>
 </section>
-<section id="section-18" class="slide level1" data-background-image="static/lowhanging_fruit_faded.jpg">
+<section id="section-20" class="slide level1" data-background-image="static/lowhanging_fruit_faded.jpg">
 <h1 data-background-image="static/lowhanging_fruit_faded.jpg"></h1>
-<h2 id="ask-for-volunteers">Ask for volunteers</h2>
+<h2 id="ask-for-volunteers-instead">Ask for volunteers instead</h2>
 <p>Or prepare for a challenge!</p>
 <aside class="notes">
 <ul>
@@ -746,7 +805,7 @@
 <aside class="notes">
 <ul>
 <li>surprisingly, teams in dire need of migrating from unmaintained/buggy solutions, were also reluctant</li>
-<li>They agreed that the situation was bad, but were never satisfied with our offering even though it was much better.</li>
+<li>They agreed that the situation was bad, but were never satisfied with our offering even though they agreed it was better.</li>
 <li>They had invested a lot of time, in small nifty features.</li>
 <li>These things didn’t seem important as they were minor things.</li>
 <li>But our brains don’t work like that, we failed to pay attention, and they did not want to loose their useful features.</li>
@@ -767,19 +826,20 @@
 </ul>
 </aside>
 </section>
-<section id="section-19" class="slide level1" data-background-image="static/dogfooding.jpg">
+<section id="section-21" class="slide level1" data-background-image="static/dogfooding.jpg">
 <h1 data-background-image="static/dogfooding.jpg"></h1>
 <aside class="notes">
 <ul>
+<li>Let’s say you’re buying a new car. It’s a bit expensive, but really nice.</li>
+<li>‘I drive this car my self.’ Suddenly we trust their opinion more</li>
 <li>Sales people use this argument all the time</li>
-<li>‘I drive this car my self.’ Suddenly we trust their review more</li>
-<li>But there is some truth to this</li>
+<li>This is often labeled a logical fallacy, but there is some truth to this</li>
 <li>Using the tools we make, is a great way to test, and improve them.</li>
-<li>Early warning system</li>
+<li>This makes us both early warning system, and experts</li>
 </ul>
 </aside>
 </section>
-<section id="section-20" class="slide level1" data-background-image="static/dogfooding_faded.jpg">
+<section id="section-22" class="slide level1" data-background-image="static/dogfooding_faded.jpg">
 <h1 data-background-image="static/dogfooding_faded.jpg"></h1>
 <h2 id="be-aware-though">Be aware though</h2>
 <p>You have insight into the tools in a way a user never will.</p>
@@ -820,6 +880,7 @@
 <li>This worked great, we got lots of valuable feedback</li>
 <li>Fast iterations, detailed bug reports, quick fixes</li>
 <li>The user felt safe, because we were right there with them</li>
+<li>Super fun!</li>
 </ul>
 </aside>
 </section>
@@ -830,23 +891,22 @@
 <aside class="notes">
 <ul>
 <li>Repeated questions</li>
-<li>Features and support both suffered a lot</li>
-<li>Some users were getting really frustrated, as their tickets weren’t handled</li>
+<li>Both development and support suffered a lot</li>
+<li>Some users were getting really frustrated, as their tickets weren’t being handled</li>
 <li>We, were getting frustrated as we were getting nowhere</li>
 </ul>
 </aside>
 </section>
 <section class="slide level1">
 
-<h2 id="so-what-changed">So what changed?</h2>
+<h2 id="so-what-had-changed">So what had changed?</h2>
 <ul>
-<li>50 users increased to 500</li>
-<li>General population instead of just the most interested</li>
+<li>20 users increased to 500</li>
 <li>We were no longer picking only low hanging fruits</li>
 <li>And this is all perfectly natural</li>
 </ul>
 </section>
-<section id="section-21" class="slide level1" data-background-image="static/white_knight.jpg">
+<section id="section-23" class="slide level1" data-background-image="static/white_knight.jpg">
 <h1 data-background-image="static/white_knight.jpg"></h1>
 <aside class="notes">
 <ul>
@@ -856,7 +916,7 @@
 </ul>
 </aside>
 </section>
-<section id="section-22" class="slide level1" data-background-image="static/white_knight_faded.jpg">
+<section id="section-24" class="slide level1" data-background-image="static/white_knight_faded.jpg">
 <h1 data-background-image="static/white_knight_faded.jpg"></h1>
 <h2 id="the-unified-support">The Unified Support</h2>
 <ul>
@@ -866,16 +926,15 @@
 </ul>
 <aside class="notes">
 <ul>
-<li>Letting users have one place to report bugs, for all services</li>
-<li>At this time there were other teams handling some services. But users only see the front end.</li>
-<li>Slack support channels became community channels</li>
-<li>In these channels user started taking on support</li>
+<li>Letting users have one place to report bugs, for all services, all teams</li>
+<li>At this time there were other teams handling some services. But users only see the front end. So that’s where they report the bugs.</li>
+<li>Slack support channels became community channels instead.</li>
+<li>In these channels user started taking on support, huge help!</li>
 </ul>
 </aside>
 </section>
-<section id="section-23" class="slide level1" data-background-image="static/full_speed.jpg">
+<section id="section-25" class="slide level1" data-background-image="static/full_speed.jpg">
 <h1 data-background-image="static/full_speed.jpg"></h1>
-<h2 id="full-speed-ahead">Full speed ahead</h2>
 <aside class="notes">
 <ul>
 <li>The pit stop was an analogy we used a lot</li>
@@ -886,10 +945,17 @@
 </ul>
 </aside>
 </section>
-<section id="section-24" class="slide level1" data-background-image="static/full_speed_faded.jpg">
+<section id="section-26" class="slide level1" data-background-image="static/full_speed_faded.jpg">
 <h1 data-background-image="static/full_speed_faded.jpg"></h1>
 <h2 id="questions">Questions?</h2>
-<p>Feel free to share your experiences, ask questions or disagree with me on Twitter: <span class="citation" data-cites="brujoand">@brujoand</span></p>
+<p>Twitter/Github: <span class="citation" data-cites="brujoand">@brujoand</span></p>
+<p>PS: Piano.io is hiring in Oslo!</p>
+<aside class="notes">
+<ul>
+<li>Feel free to share your experiences, ask questions or disagree with me on</li>
+<li>Shoot me a message if you want to learn more about working at Piano</li>
+</ul>
+</aside>
 </section>
     </div>
   </div>

@@ -12,7 +12,7 @@ for md_folder in *; do
     echo "Generating ${html_file}"
     pandoc -s -t revealjs \
       --metadata title="JavaZone 2020" \
-      --highlight-style=/Users/brujoand/src/slides.brujordet.no/zenburn.theme \
+      --highlight-style=zenburn.theme \
       -V transition=slide \
       -V backgroundTransition=fade \
       -V theme=brujoand \

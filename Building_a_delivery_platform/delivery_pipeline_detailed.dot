@@ -1,0 +1,31 @@
+digraph development {
+
+  bgcolor="transparent"
+  node [color="#F5F5DC" fontcolor="#F5F5DC" fontname="Arial" shape=record fontsize=16 fixedsize=true width=1.5 penwidth=2.5]
+  graph [overlap=false penwidth=2.5]
+  edge [color="#F5F5DC" penwidth=2.5 overlap=false]
+
+  subgraph cluster_stage {
+    "Build"
+  }
+
+  subgraph cluster_task {
+    "Compile"
+    "Test"
+    "Upload"
+  }
+
+  subgraph cluster_step {
+    "mvn build"
+    "mvn test"
+    "mvn deploy"
+  }
+
+  "Build" -> "Compile"
+  "Build" -> "Test"
+  "Build" -> "Upload"
+
+  "Compile" -> "mvn build"
+  "Test" -> "mvn test"
+  "Upload" -> "mvn deploy"
+}
