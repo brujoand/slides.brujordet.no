@@ -47,12 +47,12 @@ Anders Brujordet
 
 ::: notes
 - First off; I had no idea that this was weird in 2011, public sector
-- Mostly nerds who loved their job
+- Mostly geeks who loved their job
 - A few key people drove this specific process
 - __They had support from management__
-- Strong tech culture, lot's of knowledge sharing
+- This just made sense to the company
 - Even the financial chief implemented a coding challenge in excel during
-seminar
+a company trip.
 :::
 
 ---
@@ -65,8 +65,8 @@ seminar
 
 ::: notes
 - After working 3 years on Java, I wanted to learn more Scala
-- Finn had a really solid Scala team
-- CI: Bamboo, CD: Puppet, Monitoring: Grafana + ELK
+- Finn had a really solid Scala team working on their APIs
+- CI: Bamboo, CD: Puppet, Metrics: Grafana, Logging: ELK stack
 - Lot's of tools, and homemade deployment web UI. Nice
 - I got to create CI for Varnish
 :::
@@ -77,11 +77,10 @@ seminar
 
 ::: notes
 - Lot of the same culture as Knowit
-- Little fear of change
-- Product pushed for innovation
+- The organization was used to change
+- Strong product organization that pushed for innovation
 - Strong infra team and some eager Developers
 - __They had support from management and product__
-- They wanted to: learn, try new things, use best practices.
 :::
 
 ---
@@ -93,27 +92,28 @@ seminar
 - Project: Schibsteds Global CI/CD platform
 
 ::: notes
-- We created a global platform for CI/CD
-- CI: Travis, CD: Spinnaker, Monitoring: DataDog + Sumologic
-- More active approach to tooling.
+- Finally I joined Schibsted
+- We created a global Delivery Platform
+- CI: Travis, CD: Spinnaker, Metrics: DataDog, Logging: Sumologic
+- We had a more active approach to tooling.
 - On prem Travis, active partners on Spinnaker
 - Many other teams were creating many useful tools
 - Managed k8s clusters, custom secret management etc
-- Inspired by Netflix, Google, Twitter etc.
+- The approach was inspired by Netflix, Google, Twitter etc.
 - Huge collaborative effort
 :::
 
 ---
 
-## Why were they doing this?
+## What enabled this?
 
 ::: notes
-- Strong infra organization, and eager teams
-- Companies could save money by sharing the cost
+- As you might now, Schibsted = Many similar marketplaces and news sites
+- Naturally they have similar needs
+- Daughter companies could save money by sharing the cost
+- Strong infra organization, and development eager teams
 - __They had support from top level leadership__
-- Schibsted = Many similar sites = similar needs
 - Exceptionally hungry culture, very senior engineers
-- They wanted to: learn, try new things, use best practices.
 :::
 
 ---
@@ -139,20 +139,20 @@ seminar
 - Easier to visualize current status
 
 ::: notes
-- Fully automated -> less distractions
-- Short feedback loops -> less bugs, faster fixes
+- Fully automated -> less distractions -> Happy developers -> Productivity
+- Short feedback loops -> less bugs, faster fixes -> Productivity
 - Insight -> Easier to argue for fixing tech debt
 :::
 
 ---
 
-## So is this a Delivery Platform?
+## So were these Delivery Platforms?
 
 ![DevOps_cloud](static/devops_cloud.png){.stretch}
 
 ::: notes
 - Yes and no
-- We have a bunch of tools
+- Knowit, Finn and Schibsted had all the right tools
 - The difference is is how these tools are connected
 :::
 
@@ -219,12 +219,12 @@ seminar
 ![](static/delivery_loop.png){.stretch}
 
 ::: notes
-- This is what I call a Delivery Automation System
+- So basically we have a loop of loops
+- This is what I call the Delivery Automation System
 - Everything is chained together nicely
 - All the steps are automated from src to prod
 - Basically what Knowit & Finn had
 - This can appear as a black box, that 'fixes CI/CD'
-- But what if you have other needs, different technology?
 :::
 
 
@@ -234,10 +234,11 @@ seminar
 
 ::: notes
 - For Knowit a DAS was perfect
-- Mostly Java, same needs, same deployment target
-- Finn had a more diversity and their DAS was starting to get a lot of addons.
-- They were in a process of creating a Delivery Platform
-- For Schibsted, the DAS just doesn't work. To much diversity.
+- Mostly Java, monorepo with all the cod, same deployment target
+- Finn had a more diversity and their DAS was starting to get a lot of
+additions.
+- They were basically in a process of creating a Delivery Platform
+- For Schibsted, the DAS just couldn't work. To much diversity.
 :::
 
 ---
@@ -245,11 +246,13 @@ seminar
 ## When a DAS falls short
 
 ::: notes
-- When teams are doing different things
+- When the needs of the teams vary a lot
+- Different languages, build tools, artifact types, deployment targets
 - Backend, Machine Learning, search applications, frontend, mobile etc..
 - Finn had started to feel some of this, and made additions to the DAS
-- Schibsted had just too much diversity, and started building a platform
-- So let's look at how this is done
+- But every addition, makes the DAS more complex.
+- Eventually they moved to a Delivery Platform
+- So let's look at how that could be done
 
 :::
 
@@ -259,11 +262,24 @@ seminar
 
 ![](static/blackbox_1.png){.stretch}
 
+::: notes
+- There are different ways this could be connected
+- Maybe the DAS checks for new code, or may there is a webhook.
+- But we need to make sure that there is a uniform interface here
+:::
+
 ---
 
 ## From a DAS to Platform
 
 ![](static/blackbox_2.png){.stretch}
+
+::: notes
+- Let's say that we use Github for source code
+- We define an integration rule that whet source code wants to be built, our
+black box must get a webhook.
+
+:::
 
 ---
 
@@ -271,11 +287,25 @@ seminar
 
 ![](static/blackbox_3.png){.stretch}
 
+::: notes
+- Again let's assume we have Jenkins for builds
+- Jenkins should now own the webhook interface from source code
+- And our next rule is that  build systems uploads a semantically versioned
+artifact
+:::
+
 ---
 
 ## From a DAS to Platform
 
 ![](static/blackbox_4.png){.stretch}
+
+::: notes
+- Okay, so let's use Nexus for Artifacts
+- And our next rule is that when a new artifact is uploaded, we send an event
+to trigger deployment.
+- Our black box now only deals with deployment
+:::
 
 ---
 
@@ -283,29 +313,56 @@ seminar
 
 ![](static/blackbox_5.png){.stretch}
 
+::: notes
+- finally, we add Spinnaker for deployments
+- and our black box is gone
+- Now we only have a set of services, that are bound by very clear rules
+- In theory, this means that any part of our tooling can be replaced, as long as
+the new tool abides by these rules.
+- So let's onboard some teams from other parts of our organization.
+:::
+
 ---
 
 ## From a DAS to chaos?
 
 ![](static/blackbox_6.png){.stretch}
 
+::: notes
+- One team using stash, which is fine as they hook into Jenkins.
+- One team uses Gitlab, again fine as they upload to Nexus.
+- One team is deploying to AWS, another to Bare Metal all fine.
+- And in our case of Spinnaker, we can even have a unified UI that visualizes
+all of these different build pipelines.
+- Instead of a complex black box, we have simple rules that allow for complex
+graphs.
+- Change is now a much much easier.
+:::
+
 ---
 
 ## The magic is in the glue, not the tools
 
+::: notes
+- A Delivery Platform doesn't care which build tool you use
+- And neither should you.
+- We want to be able to extend upon these rules, not the specific tools
+:::
+
 ---
 
-| Platform | Automation System |
+| Platform | DAS |
 |-|-|
 | Opt-in | Opt-out |
 | Loose coupling | Tight coupling |
-| Compliance is extra work | Compliance is built in |
 | Individual pipelines | Shared pipelines |
-| Developers own the Pipeline | Traditional SaaS |
+| Self served | Traditional SaaS |
+| Dedicated Team | Collective effort |
 
 ::: notes
-- Features could be support for new languages or tools
-- Customizing requires knowledge of underlying tool
+- At the bottom we see one of the main problems here
+- The DAS is basically a SaaS, but it's usually not owned by one team
+- Usually it's a collaborative effort, which means it often gets neglected
 - The platform could be used as a Delivery Automation System by relying only on
 the Default Pipeline
 :::
@@ -315,13 +372,15 @@ the Default Pipeline
 ## A Delivery Platform is..
 
 .. a __customizable__ set of __services__ that can be __composed__ through
-__event integrations__ into a
-__pipeline__ that builds, verifies and deploys source code in a __safe__,
+__well defined rules__ into a
+__pipeline__ that builds, verifies and deploys source code in a __secure__,
 __predictable__ and __repeatable__ manner with __sane defaults__.
 
 ::: notes
 - That's probably the longest introduction I've had to any presentation
-- But this talk doesn't make sense if we don't have the same definition
+- But this talk doesn't make sense if we don't have the same definition of what
+a Delivery Platform is.
+- And especially how it relates to the more common Delivery Automation System.
 :::
 
 ---
@@ -330,19 +389,23 @@ __predictable__ and __repeatable__ manner with __sane defaults__.
 ## Building a Delivery Platform
 ### The profit and pain
 
+::: notes
+- So finally, how do we build one?
+:::
+
 ---
 
 
 # {data-background-image="static/map_help.jpg" style="color:black"}
 
 ::: notes
-- Where are you?
-- What is the current situation in the company?
+- First we need to figure out, where we are
+- What is the current situation in our company?
 - What works, what doesn't?
 - What is currently causing the most pain?
-- Where can we add the most value first?
-- Who can help with this?
-- Do you have backing to do this?
+- Where can we add the most value?
+- Who can help us with this?
+- Do we have backing to do this?
 :::
 
 ---
@@ -352,10 +415,10 @@ __predictable__ and __repeatable__ manner with __sane defaults__.
 
 ::: notes
 - Talk to a few people from everywhere
-- Developers, Operations, Managers, Maybe even customers?
-- What are their concerns, pain points WRT delivery?
+- Developers, Infrastructure, Managers, Product, Maybe even customers?
+- What are their concerns, pain points with regards to delivery?
 - Where do they feel that we are?
-- Do they all agree?
+- Do they all agree? Usually, not.
 :::
 
 ---
@@ -364,11 +427,11 @@ __predictable__ and __repeatable__ manner with __sane defaults__.
 ## Interviews will give you vital information
 
 ::: notes
-- Designing the platform components
-- Understanding what makes the platform useful for them
-- Visualize areas where they could collaborate with other teams
-- Identify and help mitigate team2team issues
-- Identify and mitigate biases
+- Which components we need
+- Where are we loosing the most time and resources
+- What would give the most benefit?
+- Identify was teams can collaborate, and share tooling
+- Identify and help mitigate political/personal issues between teams
 :::
 
 ---
@@ -386,13 +449,14 @@ support.
 - Support and on boarding is by far the most expensive work
 - The problems are usually very similar, and simple to fix
 - The overhead of constantly context switching is huge
-- Most people just glance at documentation, and ask for help.
+- Most people just glance at documentation, and then ask for help.
+- Make sure they have friendly teams they can talk to.
 :::
 
 ---
 
 # {data-background-image="static/map_help_faded.jpg"}
-## Use metrics to verify what you've learned
+## Get the data
 
 ::: notes
 - Start gathering metrics to visualize what you've learned from the interviews
@@ -411,17 +475,15 @@ But be careful..
 
 ::: notes
 - I tend to use the Smashing framework early on, as it's easy to hack
-- Show things that give value, but focus on what can be improved
+- Show things that give value, but focus on what can be improved.
 - One episode, where we added data from SonarQube. It showed a lot of tech
 debt. SonarQube had been running for over a year, but now that it was
 visualized an engineer took it upon himself to fix almost 200 hours of tech debt
 in a couple of days.
 - Dashboards can help us argue the case for spending resources on tech debt like
-this.
-- But if it is used to measure intangible things like people performance it is
-detrimental.
-- This problem warrants it's own presentation
-- Suffice to say; What management sees, they will measure us on.
+this, but it can't measure performance, or skill.
+- This problem warrants it's own presentation.
+- Suffice to say, that what they see they will measure.
 :::
 
 
@@ -437,11 +499,12 @@ detrimental.
 Just provide the pieces and let everyone compose their own pipelines
 
 ::: notes
+- We could have just provided a bunch of services for people to use.
 - Freedom to choose from all the tools
 - Could be nice for experienced DevOps teams
 - Less dependent on the Platform team
 - Huge cost in on-boarding for inexperienced teams
-- No centralized versioning or auditing
+- Basically what AWS does
 :::
 
 ---
@@ -452,9 +515,9 @@ Just provide the pieces and let everyone compose their own pipelines
 Provide a default path with batteries included
 
 ::: notes
+- Instead we should provide a default path with batteries included
 - Teams are free to work on code, rather than configuration
 - Teams are still free to customize their tooling
-- If something breaks they'll be more dependent on the Platform team
 - Security of having support
 - On-boarding new engineers is much easier
 :::
@@ -467,16 +530,17 @@ Provide a default path with batteries included
 - A visual Pipeline
 - Managed secrets & environment variables
 - Hardened base images
-- Monitoring with metrics & logging
+- Monitoring with default metrics & logging
 - Support
 
 ::: notes
-- A visual Pipeline
+- A visual Pipeline, like spinnaker or Gitlab or Tekton
 - Managed secrets & environment variables
 - Hardened base images
-- Monitoring with metrics & logging
+- Monitoring with default metrics & logging
 - Support
 - Stray from the path at will, but you must get back on your own.
+- Let's look at a simple example
 :::
 
 ---
@@ -484,19 +548,27 @@ Provide a default path with batteries included
 ## example.yml
 
 ```yaml
-  version: 2
   type: 'Java'
   application_name: 'dogfood-service'
 ```
 
 ::: notes
-  - So let's opt in, by adding this example.yml file
-  - We require a tool version and a name for the app, that's it.
+  - So let's opt in by adding this example.yml file
+  - We require a type and a name for the app, that's it.
   - When we commit this file, a simple jenkins build is configured, along with
   deployment of the artifact and a container to k8s.
   - Everything we don't see here is set by default.
-  - But how can we extend this?
-  - Maybe I want to disable the SonarQube check?
+:::
+
+---
+
+# is nice 👍
+yes?
+
+::: notes
+- But how can we extend this?
+- Maybe I want to disable the SonarQube check?
+- Or change the health check url?
 :::
 
 ---
@@ -510,22 +582,23 @@ Provide a default path with batteries included
       http:
         path: /_/custom_health_path
   ingress:
-    - host: dogfood-service.ingress.local
+    - host: dogfood-custom.ingress.local
   ports:
-    - target_port: 5678
+    - target_port: 6969
   replicas:
-    maximum: 10
-    minimum: 20
+    maximum: 13
+    minimum: 37
   SonarQube:
     - enabled: false
 ```
 
 ::: notes
-  - This was actually a part of a k8s deloyment
-  - So we can drop into k8s. With full access to it's powers.
+  - This was actually a part of a k8s template
+  - So we can drop straight into k8s. With full access to it's powers.
   - This is basically Fiaas, that we used at Finn.
   - For a k8s shop, this makes sense.
   - You might need a different way of doing this.
+  - But the idea works in most cases.
 :::
 
 ---
@@ -537,7 +610,9 @@ Provide a default path with batteries included
   - Talking to a new person?
 
 ::: notes
-  - What if you had to check a manual before:
+  - The trick here is to use conventions, and sane defaults
+  - What if you had to check a manual before: driving, eating or talking to
+  someone?
   - Instead we rely on conventions
   - We know that driving on a road A is similar to most roads.
   - This saves time, and makes us feel safe.
@@ -547,7 +622,7 @@ Provide a default path with batteries included
 
 ## Convention over configuration
 
-Is not only helping the consumer
+It's not only for the users
 
 :::notes
 - It makes a world of difference when:
@@ -555,7 +630,7 @@ Is not only helping the consumer
 - Figuring out what belongs where
 - Configuring custom pipelines
 - Setting up dashboards
-- Naming conventions, between Github and NexusIQ
+- Naming conventions, between Github and NexusIQ for instance
 - You can just follow the name
 - You know how we name things, so you have guidance.
 :::
@@ -574,17 +649,18 @@ Is not only helping the consumer
 
 # {data-background-image="static/challenge_conventions_faded.jpg"}
 
-Conventions should guide not restrict us.
+Conventions should be guides, not restrictions
 
 ---
 
 # {data-background-image="static/winner.jpg"}
 
 ::: notes
-- How do we know that we are winning?
+- So, how do we know that we are winning?
 - We have to define our success metrics
 - interviews gave us status quo
-- now where do we want to go?
+- We know a bit about how to layout our platform
+- But where do we want to go with this exactly?
 :::
 
 ---
@@ -598,10 +674,10 @@ Conventions should guide not restrict us.
 
 ::: notes
 - We should define a desired state
-- We reach this state by meeting small well defined goals, to keep us motivated
+- We reach this state by creating small well defined goals, to keep us motivated
 - While we watch for red flags
 - A Delivery Platform is a constant work in progress
-- No real end goal, but define a moving target 'desired state'
+- There is no real end goal, but rather a moving target 'desired state'
 - If it stops changing it's not done, it's dying
 :::
 
@@ -614,11 +690,12 @@ Conventions should guide not restrict us.
 - Lack of team metrics improvement
 
 ::: notes
-- many teams start disabling a certain feature, why? Is it not working/helping?
-- teams have no improvement on metrics, are they not using the tooling?
+- So I said, monitor red flags. What could those be?
+- Teams start disabling a certain feature, why? Is it not working/helping?
+- Teams have no improvement on metrics, are they not using the tooling?
 - This is not an insult or rebellion
 - These are signs that the platform isn't helping them
-- We need to understand and adapt
+- We need to understand why and adapt
 :::
 
 ---
@@ -626,10 +703,9 @@ Conventions should guide not restrict us.
 ## Success isn't just about what developers want
 
 ::: notes
-- The organization also needs us to focus on security
-- because often, this is overlooked and not prioritized within the teams
-- People tend to think they have okay security, without any actual data
-- "Everybody has a plan until they get punched in the face"
+- The organization also needs us to focus on security, which is often overlooked
+- People tend to think they have okay security, without any actual data or proof
+- Like Mike Tyson says, "Everybody has a plan until they get punched in the face"
 - We can easily add security checks and alerts, and even automatic pull request
 for bumping dependencies.
 - We can maintain hardened base images.
@@ -641,12 +717,13 @@ for bumping dependencies.
 # {data-background-image="static/lowhanging_fruit.jpg"}
 
 ::: notes
-- So, we have our status quo, we have defined our 'desired state'
+- So, we have our status quo, we have our 'desired state'
 - How do we start actually doing this?
-- Start with the low hanging fruits
-- Usually this means smaller teams, with less legacy
-- Usually they have less automation, maybe never even deployed to production
-- Often happy to get help, as they tend to be stretched for resources
+- Start with the low hanging fruits, your own team.
+- Then smaller, newer teams with less legacy
+- Usually they have less automation in place, maybe never even deployed to
+production?
+- They are often happy to get help, as they tend to be stretched for resources
 :::
 
 ---
@@ -662,8 +739,9 @@ for bumping dependencies.
 - When he couldn't reach them he belittled the grapes, as sour and not worth his time
 - This is a classic mistake of over-reaching, and it's easy to do.
 - As on-boarding high profile teams gives the platform publicity and validation
-- But the stakes are high, and these teams don't have time to spend on buggy platforms
-- We need to be ready for these teams
+- But the stakes are high, and these teams don't have time to spend on your WIP
+platform
+- We need to be stable for these teams to onboard
 :::
 
 
@@ -675,38 +753,23 @@ for bumping dependencies.
 Or prepare for a challenge!
 
 ::: notes
-- In the early phases of creating the first proper platform
+- In the early phases of creating the first proper platform at Schibsted
 - We were instructed to on-board certain teams
 - This sometimes worked, but also failed _hard_ at times
-- They didn't really need our tooling.
-- We got stressed as we saw this would fail
-- Gave the impression that we could give them orders.
-- This also exacerbates cognitive biases
+- Some of them didn't really need our tooling.
+- We got stressed as we saw this would fail, and started making demands
+- This gave the impression that we could give them orders.
+- Which also exacerbated cognitive biases
 :::
 
 ---
-
-## Status quo bias
-
-> The current baseline (or status quo) is taken as a reference point, and any change from that baseline is perceived as a loss
-
-
-::: notes
-- And in our case that often made sense
-- If our offering was not much better than what they already had, this was a
-loss.
-- Especially considering the work needed to migrate
-- Big reason for low hanging fruit
-:::
-
----
-
 
 ## Loss aversion
 
 > We prefer avoiding losses to acquiring equivalent gains.
 
 ::: notes
+- Big reason for going with low hanging fruit
 - surprisingly, teams in dire need of migrating from unmaintained/buggy
 solutions, were also reluctant
 - They agreed that the situation was bad, but were never satisfied with our
@@ -735,10 +798,11 @@ did not want to loose their useful features.
 # {data-background-image="static/dogfooding.jpg"}
 
 ::: notes
+- But not all biases are bad
 - Let's say you're buying a new car. It's a bit expensive, but really nice.
-- 'I drive this car my self.' Suddenly we trust their opinion more
-- Sales people use this argument all the time
-- This is often labeled a logical fallacy, but there is some truth to this
+- 'I drive this car my self.', Sales people use this argument all the time
+- Suddenly we trust their opinion more
+- This is often labeled as a logical fallacy, but there is some truth to this
 - Using the tools we make, is a great way to test, and improve them.
 - This makes us both early warning system, and experts
 :::
@@ -753,6 +817,7 @@ You have insight into the tools in a way a user never will.
 ::: notes
 - You know the code, the integrations
 - You know where to report bugs, how to fix configuration
+- And speaking of support
 :::
 
 ---
@@ -766,10 +831,12 @@ You have insight into the tools in a way a user never will.
 \- Some Platform Engineer probably
 
 ::: notes
+- This isn't a direct quote, but this could be how it feels
+- So we have to ask our selves.
 - How do users report problems?
 - How do these reports find the responsible person/team?
 - Who follows up on reports that span several teams?
-- Is this users responsibility?
+- Is this users responsibility, the teams or someone else?
 :::
 
 ---
@@ -826,6 +893,7 @@ A few months later, we were completely exhausted by constant interruptions
 - One call handles support routing
 
 ::: notes
+- He introduced the unified support
 - Letting users have one place to report bugs, for all services, all teams
 - At this time there were other teams handling some services. But users only see
 the front end. So that's where they report the bugs.
@@ -838,10 +906,12 @@ the front end. So that's where they report the bugs.
 # {data-background-image="static/full_speed.jpg"}
 
 ::: notes
+- I'd like to end with this
 - The pit stop was an analogy we used a lot
 - We were the pit stop crew
-- Users knew where to stop
-- We know who should do what
+- Developers were the drivers
+- They knew where to stop
+- We know who should fix what
 - Quick fix, quick win
 :::
 
