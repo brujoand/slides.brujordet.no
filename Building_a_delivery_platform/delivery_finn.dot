@@ -1,0 +1,14 @@
+digraph development {
+  rankdir="TB"
+  bgcolor="transparent"
+  graph [overlap=false penwidth=2.5]
+  node [color="#F5F5DC" fontcolor="#F5F5DC" fontname="Arial" shape="record" fontsize=16 fixedsize=true width=1.5 penwidth=2.5]
+  edge [color="#F5F5DC" fontcolor="#F5F5DC" penwidth=2.5 overlap=false]
+
+  "Finnbuild" -> "Stash"
+  "Finnbuild" -> "Nexus"
+  "Pipeline" -> "Nexus"
+  "Pipeline" -> "Dev"
+  "Pipeline" -> "Production"
+
+}
