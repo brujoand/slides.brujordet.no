@@ -1,10 +1,13 @@
 
 # {data-background-image="static/soria_moria.jpg" style="color:LightGray"}
 ## BUILDING A DELIVERY PLATFORM {.slide: style="color:Black"}
+</br>
+</br>
+</br>
 
 ::: notes
-- Hi, my name is Anders work with DevOps tooling at Piano here in Oslo
-- And I want to talk to you about delivery, and delivery automation
+- Hi, my name is Anders and I work with DevOps tooling at Piano here in Oslo
+- I want to talk to you about delivery, and delivery automation today
 :::
 
 ---
@@ -15,7 +18,7 @@
 2. How do we build a Delivery Platform?
 
 ::: notes
-- I want to talk about:
+- So we'll look at:
 - What is a Delivery Platform?
 - And how do we build one?
 :::
@@ -28,10 +31,9 @@
 Let's start by looking at Delivery Automation
 
 ::: notes
-- So what is a Delivery Platform?
-- We'll start by looking at Delivery Automation
+- We'll start by looking at Delivery Automation in general
 - By this I mean, automating the process of getting source code into production
-- Let's look at some examples of delivery automations
+- Let's look at some examples of delivery automation
 :::
 
 ---
@@ -41,9 +43,9 @@ Let's start by looking at Delivery Automation
 ![](static/delivery_knowit.png){.stretch}
 
 ::: notes
-- This was a project in the public sector in 2011, building an integration bus for the municipality
-- Pretty hip setup for the time, with a monorepo and a up to date Java version.
-- So, Hudson, the build server checks for commits in Github. If a change is found it
+- So I worked at knowit as a consultant in 2011. Our project was building an integration bus for the municipality
+- We had a pretty hip setup for the time, with a monorepo and a up to date Java version.
+- So here we see, Hudson, the build server checks for commits in Github. If a change is found it
 builds it and publishes the artifact to Nexus.
 - We then invoked some Ruby scripts that fetched artifacts from Nexus and
 deployed them to dev or production. This is the brain of the operation.
@@ -63,9 +65,8 @@ deployed them to dev or production. This is the brain of the operation.
 bamboo. It would let you build any Finn project just by issuing 'Finnbuild
 build'.
 - Like at Knowit, any change would get picked up, built, tested and uploaded to nexus.
-- Another homegrown tool, Pipeline would present a visual pipeline which then
-would allow you to deploy to test, and later production. Puppet was operating in
-the background for this.
+- Then another homegrown tool, Pipeline would present a visual pipeline which
+would allow you to deploy to test, and later production.
 - This worked primarily for JVM projects, but as I left Finn support for
 containers were also in the works.
 - Finnbuild and Pipeline were the brains of this setup
@@ -78,13 +79,13 @@ containers were also in the works.
 ![](static/delivery_schibsted.png){.stretch}
 
 ::: notes
-- At Schibsted we set out to create a global Delivery Platform for about 1500 developers.
+- When I joined Schibsted in 2016 we set out to create a global Delivery Platform for about 1500 developers.
 - Right of the bat there is a subtle difference here if we compare to Finn and
 Knowit. This system doesn't have a central custom 'brain'.
 Instead it's a sequential line of events. We'll get back to why that's important
 later.
-- Github notifies Travis of new commits, who in turn builds tests and uploads
-them. Spinnaker is then notified about the new artifact and deploys.
+- But as we can see Github notifies Travis of new commits, who in turn builds, tests and uploads
+the artifacts. Spinnaker is then notified about the new artifact and deploys them.
 - Because of the diverse tech stacks, a custom brain just wouldn't be
 feasible. It would be too complex.
 :::
@@ -98,9 +99,11 @@ feasible. It would be too complex.
 - Support from management
 
 ::: notes
-- Strong engineers with high nerd factor
-- Heavy focus on continuous improvements
-- Management understood the benefits of a good delivery process
+- But all of these are pretty cool right?
+- What enabled these companies to tailor their delivery process in this way?
+- They had strong engineers with high nerd factor
+- There was also a heavy focus on continuous improvements
+- And Management understood the benefits of a good delivery process
 :::
 
 ---
@@ -115,10 +118,13 @@ feasible. It would be too complex.
   - More engaged product teams
 
 ::: notes
-- Delivery is automated -> less distractions -> Better productivity
-- This also makes the users feel safe
-- Short feedback loops -> less bugs, faster fixes -> Better Productivity
-- This also allows product to see POCs faster and be more engaged.
+- So what benefits did these setups bring?
+- First of all automating delivery means less distractions, and more
+productivity. And when you can trust this automation it gives security.
+- Short feedback loops let's you fix problems when they are fresh in your mind,
+which again increases productivity.
+- All of this also allows product to come closer to developers as Proof of
+Concept development is quick.
 :::
 
 ---
@@ -128,11 +134,11 @@ feasible. It would be too complex.
 ![DevOps_cloud](static/devops_cloud.png){.stretch}
 
 ::: notes
-- Yes and no
-- Knowit, Finn and Schibsted had all the right tools
-- And these tools automated Delivery
+- Well, yes and no
+- Knowit, Finn and Schibsted all had good tools that automated the Delivery
+process
 - The difference is is how these tools are connected
-- But to understand this, we need to look at what they are doing
+- To understand this, we need to look at what these tools are are doing
 :::
 
 ---
@@ -154,10 +160,10 @@ feasible. It would be too complex.
 ![](static/development_loop.png){.stretch}
 
 ::: notes
-- We start by pushing some code change
+- The development loop starts by pushing some code change
 - We build it
 - We test it
-- We Validate it, maybe by some static code analysis or security check
+- We Validate it using some static code analysis or security check
 - If all is good, upload the built artifact
 - If not, repeat the loop
 :::
@@ -169,7 +175,7 @@ feasible. It would be too complex.
 ![](static/deployment_loop.png){.stretch}
 
 ::: notes
-- We started with the development loop
+- So we started with the development loop
 - Then we deploy the built artifact
 - We run integration tests or manual tests
 - Then we verify based on the results or a manual judgment
@@ -186,7 +192,7 @@ feasible. It would be too complex.
 - We started with development loop
 - Then we had the deployment loop
 - Now we monitor and watch for problems
-- This could be runtime errors, vulnerabilities etc..
+- This could be runtime errors, vulnerabilities and so forth..
 - When a problem occurs, we alert and maybe we rollback
 - In any case we go back to the development loop and start over
 :::
@@ -203,10 +209,10 @@ feasible. It would be too complex.
 - Everything is chained together nicely
 - All the steps are automated from src to prod
 - Basically what Knowit & Finn had
-- This can appear as a black box, that 'fixes CI/CD' as there is a custom brain
+- This is often implemented as a black box, that 'fixes CI/CD' as there is a custom brain
 that knows how our tooling should be connected.
 - For knowit this was some ruby scripts, for Finn it was Finnbuild and the
-Pipeline tool.
+Pipeline tool. Both of these had custom 'brains' that controlled the workflow.
 :::
 
 ---
@@ -227,17 +233,15 @@ in a process of creating a Delivery Platform when I left.
 ## When a Delivery Platform shines
 
 ::: notes
-- For Schibsted, the DAS just couldn't work. To much diversity
-- Schibsted as you might now, is made up of several news sites and marketplaces
-around the world.
+- For Schibsted, the DAS just couldn't work. As you might now, Schibsted is made up of several news sites and marketplaces
+around the world. And thus there is a lot of diversity between these sites.
 - We had different languages, build tools, artifact types, deployment targets
-- This is when a Delivery Platform is great, as it allows the freedom to choose
-the tooling you need.
-- Finn had started to feel some of this, and made additions to the DAS
-- But every addition, makes the DAS more complex and harder to maintain.
-- It's like a monolith, with ever increasing scope and eventually they moved to a Delivery Platform
-- So let's look at how that could be done
-
+and for a Delivery Platform this works just great as we'll see.
+- If you keep adding new tools and support new tech stacks and deployment
+targets in a custom brain for delivery it will eventual become too complex and
+impossible to maintain.
+- If this sounds familiar a Delivery Platform might be a good next step for your
+organization. So let's look at how that journey could be made.
 :::
 
 ---
@@ -250,6 +254,10 @@ the tooling you need.
 - There are different ways this could be connected
 - Maybe the DAS checks for new code, or may there is a webhook.
 - But we need to make sure that there is a uniform interface here
+- I've drawn the entire DAS inside the black box here, as there is usually only
+custom integrations between the tools. Meaning we can't make any general
+assumptions about how they are connected.
+- If that's not the case for you, then you're already on your way!
 :::
 
 ---
@@ -260,7 +268,7 @@ the tooling you need.
 
 ::: notes
 - Let's say that we use Github for source code
-- We define an integration rule that whet source code wants to be built, our
+- We define an integration rule that when source code wants to be built, our
 black box must get a webhook.
 :::
 
@@ -297,9 +305,8 @@ to the black box to trigger deployment.
 ![](static/blackbox_5.png){.stretch}
 
 ::: notes
-- finally, we add Spinnaker for deployments
-- and our black box is gone
-- Now we have a set of services, that are bound by very clear rules
+- finally, we add Spinnaker for deployments and our black box is gone
+- Now we have a set of services, that are bound by clear rules
 - In theory, this means that any part of our tooling can be replaced, as long as
 the new tool abides by these rules.
 - So let's onboard some teams from other parts of our organization.
@@ -315,7 +322,8 @@ the new tool abides by these rules.
 - Oh no, what happened to our nice graph? :(
 - One team is using stash, which is fine as they hook into Jenkins.
 - One team uses Gitlab, again fine as they upload to Nexus.
-- One team is deploying to AWS, another to Bare Metal all fine.
+- One team is deploying to AWS, another to Bare Metal all fine as Spinnaker
+supports these targets.
 - And in our case of Spinnaker, we can even have a unified UI that visualizes
 all of these different build pipelines.
 - Instead of a complex black box, we have simple rules that allow for complex
@@ -345,12 +353,15 @@ graphs.
 | Dedicated Team | Collective effort |
 
 ::: notes
-- At the bottom we see one of the main problems here
-- The DAS is basically a SaaS, but it's usually not owned by one team
-- Usually it's a collaborative effort, which means it often gets neglected
-- The platform could be used as a Delivery Automation System by relying only on
-the Default Pipeline
-- Which should "just work" for most teams.
+- Now this looks very clear cut, which is never the case with these things.
+- But a platform is usually opt in, loosely coupled, customizable and self served
+with dedicated support.
+- Where as a Delivery Automation System is typically enabled by default, tightly
+coupled with the tools and hard to customize.
+- But at the bottom we see one of the main problems here
+- The DAS is basically a SaaS, but it's usually not owned by one team, instead
+it's often a collaborative effort which means it tends to acquire a lot of
+technical debt.
 :::
 
 
@@ -364,23 +375,24 @@ __pipeline__ that builds, verifies and deploys source code in a __secure__,
 __predictable__ and __repeatable__ manner with __sane defaults__.
 
 ::: notes
-- So to wrap up, I'll let you read this definition < let them read the slide >
+- So to wrap up this part, I'll let you read the definition < let them read the slide >
 - Or in keywords for those who hate walls of text, like me
 :::
 
 ---
 
 ## Or to summarize
+A test, build and deployment process which is:
 - Customizable
-- Well defined rules
 - Secure
 - Predicable
-- Sane defaults
+- Has sane defaults
 
 ::: notes
 - Hopefully this has given us a common ground to build on.
 - What I really want you to understand here is the difference between a Delivery
-Platform and the more common Delivery Automation System.
+Platform and the more common Delivery Automation System and how they both are
+good approaches but shine in different scenarios.
 :::
 
 ---
@@ -427,10 +439,12 @@ Platform and the more common Delivery Automation System.
 ## What are we looking for?
 
 ::: notes
-- What should we support by default?
-- Where can we give the most value?
-- Identify what teams can collaborate on, and share tooling
-- Identify and help mitigate political/personal issues between teams
+- So what are we looking for here?
+- We want to know What should we support by default
+- Where we can give the most value
+- We want to Identify what teams can collaborate, and share tooling or
+customizations
+- And we want to Identify and help mitigate political/personal issues between teams
 :::
 
 ---
@@ -445,7 +459,7 @@ Yes, kind of..
 - If the teams are not cooperating you will be blocked by discussions and
 support.
 - If teams are collaborating, they will support each other.
-- Support and on boarding is by far the most expensive work
+- Support and on boarding is by far the most expensive work in this process.
 :::
 
 ---
@@ -454,12 +468,13 @@ support.
 ## Gather data
 
 ::: notes
+- Step two
 - Start gathering metrics to visualize what you've learned from the interviews
 - Did the metrics confirm or deny what you learned?
 - Let's put this data in a dashboard.
 - One episode, where we added data from SonarQube. It showed a lot of tech
 debt. SonarQube had been running for over a year, but now that it was
-visualized an engineer took it upon himself to fix almost 200 hours of tech debt
+visualized one engineer took it upon them self to fix almost 200 hours of tech debt
 in a couple of days. Instant win.
 :::
 
@@ -471,13 +486,10 @@ in a couple of days. Instant win.
 But be careful..
 
 ::: notes
-- Show things that give value, but focus on what can be improved.
-- Dashboards can help us argue the case for spending resources on tech debt or
-new features.
+- Dashboards make the metrics official, so show things that give value, but focus on what can be improved.
+- Dashboards can help us argue the case for spending resources on tech debt or new features.
 - But what management sees, they will measure us on. And metrics are almost
-never the answer for meausing people performance.
-- This problem warrants it's own presentation, but suffice to say, that what
-management sees, they will measure.
+never the answer for measuring people performance.
 :::
 
 ---
@@ -485,9 +497,9 @@ management sees, they will measure.
 # The Golden Path {data-background-image="static/golden_path.jpg"}
 
 ::: notes
-- So, I mentioned earlier that we need a default setup, that fit's most people.
-and replicates the Delivery Automation System
-- That's not always true though
+- Too much freedom, can be a bad thing if it means that you have to create your
+entire deployment setup manually.
+- So how much freedom is enough?
 :::
 
 ---
@@ -495,7 +507,7 @@ and replicates the Delivery Automation System
 # {data-background-image="static/golden_path_faded.jpg"}
 ## The open platform
 
-Just provide the pieces and let everyone compose their own pipelines
+We could just provide the tools and let everyone compose their own automations
 
 ::: notes
 - We could have just provided a bunch of services for people to use.
@@ -503,7 +515,7 @@ Just provide the pieces and let everyone compose their own pipelines
 - Could be nice for experienced DevOps teams
 - Less dependent on the Platform team
 - Huge cost in on-boarding for inexperienced teams though
-- Basically what AWS does and it's not exactly a Platform
+- Basically what AWS does and it's not exactly a Delivery Platform
 :::
 
 ---
@@ -514,7 +526,8 @@ Just provide the pieces and let everyone compose their own pipelines
 Provide a default set of tools with batteries included
 
 ::: notes
-- Instead we could provide a default set of tools with batteries included
+- Instead we could provide a default set of tools with batteries included, and
+this is in fact our third step.
 - Teams are free to work on code, rather than configuration
 - Teams are still free to customize their tooling
 - They gain the security of having support
@@ -534,12 +547,13 @@ Provide a default set of tools with batteries included
 
 ::: notes
 - So what do we need for this?
-- A visual Pipeline, like spinnaker or Gitlab or Tekton
+- A visual Pipeline, like spinnaker or Gitlab or Tekton which can show us
+    exactly what is currently happening in our delivery pipeline.
 - Managed secrets & environment variables, automatically injected at runtime
 - Hardened base images for containers or VMs
 - Monitoring with default metrics & logging
 - Support
-- Let's look at a simple example
+- Let's look at a simple example at how we could onboard teams
 :::
 
 ---
@@ -552,8 +566,9 @@ Provide a default set of tools with batteries included
 ```
 
 ::: notes
-  - So let's opt in to the Platform by adding this example.yml file
-  - We require a type and a name for the app, that's it.
+  - So let's opt in to the Platform by adding this example.yml file to our git
+  repository.
+  - It requires a type and a name for the app, that's it.
   - When we commit this file, a simple jenkins build is configured, along with
   deployment of the artifact and a container to k8s.
   - Everything we don't see here is set by default.
@@ -567,6 +582,7 @@ Provide a default set of tools with batteries included
 - But how can we extend this?
 - Maybe I want to disable the SonarQube check?
 - Or change the health check url?
+- I want freedom damn it!
 :::
 
 ---
@@ -591,12 +607,13 @@ Provide a default set of tools with batteries included
 ```
 
 ::: notes
-  - This was actually a part of a k8s template
+  - Well this was actually a part of a k8s template
   - So we can drop straight into k8s. With full access to it's powers.
   - This example is based on PaaS, which we used at Schibsted.
-  - And for a k8s shop, this makes sense.
+  - And for a k8s shop, this makes a lot of sense.
   - You might need a different way of doing this in your platform.
-  - But this idea can be implemented in many ways
+  - But this idea can be implemented in many ways as it relies on a simple
+  concept
 :::
 
 ---
@@ -608,11 +625,11 @@ Provide a default set of tools with batteries included
   - Talking to a new person?
 
 ::: notes
-  - And the idea is convention over configuration.
+  - And the concept is convention over configuration.
   - What if you had to check a manual before: driving, eating or talking to
   someone?
   - Instead we rely on conventions
-  - We know that driving on a road A is similar to most roads.
+  - We know that driving on a road in Oslo is similar to most roads other roads.
   - This saves time, and makes us feel safe.
 :::
 
@@ -627,9 +644,9 @@ Not only user benefit from this
 - Integrating tools
 - Figuring out what belongs where
 - Setting up dashboards
-- Naming conventions, between Github and NexusIQ for instance
+- Naming conventions, between Github and Nexus for instance
 - You can just follow the name
-- You know how we name things, so can find things.
+- If you know how we name things, you can find things without help.
 :::
 
 ---
@@ -639,14 +656,18 @@ Not only user benefit from this
 
 ::: notes
 - But don't just blindly follow
-- Challenge the conventions, that's how they evolve
+- Challenge the conventions when they seem wrong, that's how they evolve
 :::
 
 ---
 
 # {data-background-image="static/challenge_conventions_faded.jpg"}
 
-Conventions should be guides, not restrictions
+Conventions should be like the golden path, not like a walled garden.
+
+::: notes
+- Conventions should be like the golden path, not like a walled garden.
+:::
 
 ---
 
@@ -671,11 +692,12 @@ Conventions should be guides, not restrictions
 - Monitor for red flags
 
 ::: notes
-- We should define a desired state
+- We should define a desired state, and this will be our step 4.
 - We reach this state by creating small well defined goals, to keep us motivated
 - Because a Delivery Platform is a constant work in progress
-- There is no real end goal, but rather a moving target 'desired state'
-- So staying motivated is hard, as we're always improving
+- There is no real end goal, but rather a moving target which is the 'desired state'
+- This means that staying motivated can be hard, as we're always changing our goal. So savor the
+small victories.
 :::
 
 ---
@@ -687,7 +709,7 @@ Conventions should be guides, not restrictions
 - Lack of team metrics improvement
 
 ::: notes
-- So I said, monitor red flags. What could those be?
+- I also wrote monitor red flags on the previous slide. What could those be?
 - Teams start disabling a certain feature, why? Is it not working/helping?
 - Teams have no improvement on metrics, are they not using the tooling?
 - Is this mutiny, rebells? Probably not.
@@ -702,12 +724,12 @@ Conventions should be guides, not restrictions
 
 ::: notes
 - The organization also needs us to focus on security, which is often overlooked
-- People tend to think they have okay security, without any actual data or proof
+- People tend to think they have okay security, without any actual data or
+proof, and then they get hacked and have no idea what to do.
 - Like Mike Tyson says, "Everybody has a plan until they get punched in the
-face", or hacked in our case.
+face"
 - We can easily add security checks and alerts, and even automatically create pull request
-for bumping dependencies. These features can be added to the platform without
-blacking anyone.
+for bumping dependencies. We could also supply tooling for incident management.
 :::
 
 ---
@@ -767,6 +789,7 @@ that we could give them orders.
 > We prefer avoiding losses to acquiring equivalent gains.
 
 ::: notes
+- < let them read >
 - We don't like loosing things, even with a potential gain.
 - surprisingly, teams in dire need of migrating from unmaintained/buggy
 solutions, were sometimes reluctant.
@@ -786,6 +809,7 @@ did not want to lose their useful features.
 
 
 ::: notes
+- < let them read >
 - As a kid, I always felt that dinner tasted better when I helped make it.
 - and keeping the previous team in mind, they had created this tooling themselves
 - the IKEA effect probably contributed to their reluctance to on-board
@@ -798,11 +822,11 @@ did not want to lose their useful features.
 ::: notes
 - But not all biases will work against us.
 - Let's say you're buying a new car. It's a bit expensive, but really nice.
-- The sales person say: 'I drive this car my self.'
+- The sales person says: 'I drive this car my self.'
 - Suddenly we trust their opinion more
 - This is often labeled as a logical fallacy, but there is some truth to this
 - Using the tools we make, is a great way to test, and improve them.
-- This makes us both early warning system, and experts
+- Dog fooding makes us both early warning system, and experts
 :::
 
 ---
@@ -813,9 +837,10 @@ did not want to lose their useful features.
 You have insight into the tools in a way a user never will.
 
 ::: notes
-- You know the code, the integrations
-- You know where to report bugs, how to fix configuration
-- And speaking of support, how should we handle support?
+- But be aware of your own advantage
+- You know the code and the integrations
+- You know where to report bugs and how to fix configuration
+- And speaking of reporting bugs, how should we handle support?
 :::
 
 ---
@@ -839,14 +864,14 @@ You have insight into the tools in a way a user never will.
 
 ---
 
-## First iteration at Schibsted
+## In the beginning it was great!
 - One Delivery team of 4 people
-- Artifactory, Travis, Spinnaker
+- Artifactory, Travis and Spinnaker
 - We helped people on Slack
 
 ::: notes
 - In the early days at Schibsted we had one Delivery team of 4 people
-- We provided Artifactory, Travis, Spinnaker
+- We provided Artifactory, Travis, Spinnaker in a nice platform package
 - We helped people on Slack 24/7 and were extremely available
 - This worked great, we got lots of valuable feedback
 - Fast iterations, detailed bug reports, quick fixes
@@ -857,9 +882,6 @@ You have insight into the tools in a way a user never will.
 ---
 
 ## But it doesn't scale
-
-A few months later, we were completely exhausted by constant interruptions from
-support
 
 ::: notes
 - A few months later the magic was gone. We were exhausted.
@@ -902,7 +924,7 @@ onboard
 - Letting users have one place to report bugs, for all services, all teams
 - At this time there were other teams handling some services. But users only see
 the front end. So that's where they report the bugs.
-- Slack support channels became community channels instead.
+- Our previous Slack support channels became community channels instead.
 - And in these channels user started taking on support, huge help!
 - Finally we had support under control.
 :::
@@ -911,15 +933,23 @@ the front end. So that's where they report the bugs.
 
 # To summarize
 
-- Define your 'Current State'
+1. Define your 'Current State'
   - Interview people
-- Get dashboards
-- Define a Golden Path
+2. Get dashboards
+3. Define a Golden Path
   - Rely on Convention over configuration
-- Define your 'Desired State'
-- Focus on low hanging fruits first
-- Observe biases
-- Have a single entry for support
+4. Define your 'Desired State'
+  - Focus on low hanging fruits first
+  - Observe and manage biases
+5. Have a single point of entry for support
+
+::: notes
+- define your current state
+- Create dashboards with metrics
+- Define a golden path
+- Define your Desired State
+- Create a single point of entry for support
+:::
 
 ---
 
@@ -927,7 +957,7 @@ the front end. So that's where they report the bugs.
 
 ::: notes
 - I'd like to end with this
-- The pit stop was an analogy we used a lot
+- The pit stop was an analogy we used a lot at Schibsted
 - We were the pit stop crew
 - Developers were the drivers
 - They knew where to stop
