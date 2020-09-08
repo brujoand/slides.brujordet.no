@@ -20,7 +20,7 @@ for md_folder in *; do
       -V slideNumber=\"c/t\" \
       -V disableLayout=false \
       -V center=true \
-      -V revealjs-url=../.reveal.js \
+      -V revealjs-url=../reveal.js \
       -o "$html_file" "$md_file"
     echo "<a href='$html_file'>${md_folder##*/}/${md_file##*/}</a>" >> index.html
   done
