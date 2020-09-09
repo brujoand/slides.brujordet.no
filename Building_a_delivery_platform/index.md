@@ -383,6 +383,7 @@ __predictable__ and __repeatable__ manner with __sane defaults__.
 
 ## Or to summarize
 A test, build and deployment process which is:
+
 - Customizable
 - Secure
 - Predicable
@@ -933,22 +934,18 @@ the front end. So that's where they report the bugs.
 
 # To summarize
 
-1. Define your 'Current State'
-  - Interview people
-2. Get dashboards
-3. Define a Golden Path
-  - Rely on Convention over configuration
-4. Define your 'Desired State'
-  - Focus on low hanging fruits first
-  - Observe and manage biases
-5. Have a single point of entry for support
+- Define your 'Current State'
+- Get metrics into dashboards early on
+- Define your 'Desired State'
+- Define a Golden Path
+- Have a single point of entry for support
 
 ::: notes
-- define your current state
-- Create dashboards with metrics
-- Define a golden path
-- Define your Desired State
-- Create a single point of entry for support
+- Define your 'Current State'
+- Get metrics into dashboards early on
+- Define your 'Desired State'
+- Define a Golden Path
+- Have a single point of entry for support
 :::
 
 ---

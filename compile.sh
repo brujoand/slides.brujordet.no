@@ -6,6 +6,7 @@ rm -f index.html
 
 for md_folder in *; do
   [[ ! -d "$md_folder" ]] && continue
+  [[ "$md_folder" == 'reveal.js' ]] && continue
   for md_file in "$md_folder"/*.md; do
     echo "Handling ${md_file}"
     html_file=${md_file/.md/.html}
