@@ -9,10 +9,11 @@ for md_folder in *; do
   [[ "$md_folder" == 'reveal.js' ]] && continue
   for md_file in "$md_folder"/*.md; do
     echo "Handling ${md_file}"
+    title="$(tr '_' ' ' <<< "$md_folder")"
     html_file=${md_file/.md/.html}
     echo "Generating ${html_file}"
     pandoc -s -t revealjs \
-      --metadata title="JavaZone 2020" \
+      --metadata title="$title" \
       --highlight-style=zenburn.theme \
       -V transition=slide \
       -V backgroundTransition=fade \
